@@ -1,0 +1,3 @@
+How can one access a docker container via exec?
+On an ECS-EC2 cluster (as you can't get to the
+docker services with Fargate)

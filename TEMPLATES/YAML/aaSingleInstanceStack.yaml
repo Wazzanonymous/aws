@@ -1,0 +1,95 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  aaGenEC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      InstanceType: 't2.micro'
+      ImageId: 'ami-02396cdd13e9a1257'
+      KeyName: 'anzacair-260423'
+      IamInstanceProfile: !Ref aaGenEC2systemsManagerConnectRole
+      SubnetId: 'subnet-0bd3b2ae752115610'
+      Monitoring: 'false'
+      InstanceInitiatedShutdownBehavior: 'stop'
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash -xe
+          sudo amazon-linux-extras install -y nginx1
+          sudo service nginx start
+      MetadataOptions:
+        HttpTokens: 'required'
+      CreditSpecification:
+        CpuCredits: 'standard'
+      DisableApiTermination: 'false'
+      InstanceMarketOptions:
+        MarketType: 'spot'
+        SpotOptions:
+          SpotInstanceType: 'one-time'
+          InstanceInterruptionBehavior: 'terminate'
+      BlockDeviceMappings:
+        - DeviceName: '/dev/xvda'
+          Ebs:
+            VolumeSize: 8
+            VolumeType: 'gp2'
+            DeleteOnTermination: 'true'
+      NetworkInterfaces:
+        - DeviceIndex: 0
+          DeleteOnTermination: 'true'
+          AssociatePublicIpAddress: 'false'
+          SubnetId: 'subnet-0bd3b2ae752115610'
+          GroupSet:
+            - !Ref aaGenSecurityGroup
+      Tags:
+        - Key: 'Name'
+          Value: 'aaGenAWS'
+
+  aaGenSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: 'aaGen security group'
+      VpcId: 'vpc-056024b69e4bc0ec9'
+      SecurityGroupIngress:
+        - IpProtocol: 'tcp'
+          FromPort: 22
+          ToPort: 22
+          CidrIp: '0.0.0.0/0'
+      SecurityGroupEgress:
+        - IpProtocol: '-1'
+          CidrIp: '0.0.0.0/0'
+
+  aaGenEC2systemsManagerConnectRole:
+    Type: 'AWS::IAM::InstanceProfile'
+    Properties:
+      Path: '/'
+      Roles:
+        - !Ref aaGenEC2systemsManagerConnectRoleRole
+
+  aaGenEC2systemsManagerConnectRoleRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              Service: 'ec2.amazonaws.com'
+            Action: 'sts:AssumeRole'
+      Path: '/'
+      Policies:
+        - PolicyName: 'aaGenEC2systemsManagerConnectRolePolicy'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: 'Allow'
+                Action:
+                  - 'ssm:DescribeAssociation'
+                  - 'ssm:GetDeployablePatchSnapshotForInstance'
+                  - 'ssm:GetDocument'
+                  - 'ssm:GetManifest'
+                  - 'ssm:GetParameters'
+                  - 'ssm:ListAssociations'
+                  - 'ssm:ListInstanceAssociations'
+                  - 'ssm:PutInventory'
+                  - 'ssm:PutComplianceItems'
+                  - 'ssm:PutConfigurePackageResult'
+                  - 'ssm:UpdateAssociation'
+                  

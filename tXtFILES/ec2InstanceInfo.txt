@@ -1,0 +1,140 @@
+Access key ID,Secret access key
+AKIA5TEAVDRPB2TJ2PUZ,KXqh3mIi0h0V8cybW0c1pkGrGuoutVObhopUJr1D
+*******************************************************************
+Organization ID
+o-61fj8t9ehv
+
+ID: i-083b45428d7cf6d74
+KEY: 04b4ff230289f7100
+REGION: us-east-1a
+OUTPUT: (text, json, yaml, table[ASCII], yaml-stream)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Instance ID: i-083b45428d7cf6d74 (aaGenInstance)
+
+Private IPv4 addresses: dhcp
+IPv6 address
+–
+Instance state
+Stopped
+Public IPv4 DNS
+–
+Hostname type
+IP name: ip-172-31-7-182.ec2.internal
+Private IP DNS name (IPv4 only)
+ ip-172-31-7-182.ec2.internal
+Answer private resource DNS name
+–
+Instance type
+t2.micro
+Elastic IP addresses/
+–
+Auto-assigned IP address
+–
+VPC ID
+ vpc-056024b69e4bc0ec9 (aaVPC-1) 
+AWS Compute Optimizer finding
+Opt-in to AWS Compute Optimizer for recommendations.
+|
+Learn more 
+IAM Role
+ EC2systemsManagerConnectRole 
+Subnet ID
+ subnet-0bd3b2ae752115610 
+Auto Scaling Group name
+–
+IMDSv2
+Required
+Instance details
+Info
+Platform
+ Amazon Linux (Inferred)
+AMI ID
+ ami-02396cdd13e9a1257
+Monitoring
+disabled
+Platform details
+ Linux/UNIX
+AMI name
+ al2023-ami-2023.0.20230419.0-kernel-6.1-x86_64
+Termination protection
+Disabled
+Stop protection
+Disabled
+Launch time
+ Wed Apr 26 2023 17:10:18 GMT+1000 (Australian Eastern Standard Time) (about 17 hours)
+AMI location
+ amazon/al2023-ami-2023.0.20230419.0-kernel-6.1-x86_64
+Instance auto-recovery
+Default
+Lifecycle
+normal
+Stop-hibernate behavior
+disabled
+AMI Launch index
+0
+Key pair assigned at launch
+ anzacair-260423
+State transition reason
+User initiated (2023-04-26 10:34:17 GMT)
+Credit specification
+standard
+Kernel ID
+–
+State transition message
+ Client.UserInitiatedShutdown: User initiated shutdown
+Usage operation
+ RunInstances
+RAM disk ID
+–
+Owner
+ 934425205854
+ClassicLink
+
+    –
+
+Enclaves Support
+–
+Boot mode
+ uefi-preferred
+Current instance boot mode
+ legacy-bios
+Allow tags in instance metadata
+Disabled
+Use RBN as guest OS hostname
+ Disabled
+Answer RBN DNS hostname IPv4
+ Disabled
+Host and placement group
+Info
+Host ID
+–
+Affinity
+–
+Placement group
+–
+Host resource group name
+–
+Tenancy
+ default
+Placement group ID
+–
+Virtualization type
+ hvm
+Reservation
+ r-09dc0a3baaadf9197
+Partition number
+–
+Number of vCPUs
+1
+Capacity reservation
+Info
+Capacity Reservation ID
+–
+Capacity Reservation setting
+open
+Accelerators
+Info
+Elastic Graphics ID
+–
+Elastic inference accelerator ID
+–

@@ -1,0 +1,42 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Single-Instance basic ec2 template
+Parameters:
+  Subnet:
+    Type: AWS::EC2::Subnet::Id
+    Description: Where the instance will be placed
+  IamInstanceProfile:
+    Type: String
+    Description: Name of the SSM instance role should go here.
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup::Id
+  InstanceType:
+    Type: ami-2023.0.20230419.0-kernel-6.1-x86_64
+    Default: t2.micro
+    AllowedValues:
+    - t2.nano
+    - t2.micro
+    - t2.small
+    - t3.nano
+    - t3.micro
+    - t3.small
+    - m1.medium
+Resources:
+  MyInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash -xe
+          sudo amazon-linux-extras install nginx1 -y
+          sudo service nginx start
+      ImageId: ami-2023.0.20230419.0-kernel-6.1-x86_64
+      InstanceType:
+        Ref: InstanceType
+      SecurityGroupIds:
+        - Ref: SecurityGroup
+      SubnetId:
+        Ref: Subnet
+      IamInstanceProfile:
+        Ref: IamInstanceProfile
+        

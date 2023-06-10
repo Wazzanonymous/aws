@@ -1,0 +1,34 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: Single-instance AnzacAir-Generic_EC2
+
+Parameters:
+  Subnet:
+    Description: Where the instance will be placed.
+  IamInstanceProfile:
+    Description: It would be a good idea to put the name of the SSM instance role here.
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup::Id
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+    - t2.nano
+    - t2.micro
+    - t2.small
+    - t3.nano
+    - t3.micro
+    - t3.small
+    - m2.medium
+Resources:
+  GenInstance:
+    Type: AWS::EC2::GenInstance
+    Proerties: 
+      UserData:
+      ImageIds: ami-02396cdd13e9a1257 
+      InstanceType:
+      SecurityGroupId:
+      SubnetId:
+      IamInstanceProfile:
+

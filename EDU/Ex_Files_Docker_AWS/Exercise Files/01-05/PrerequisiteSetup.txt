@@ -1,0 +1,12 @@
+CodeBuild:
+Capture and update the string REPLACE_WITH_ECR_REPOSITORY_URI with the ECR Registry ID
+ in the buildspec.yml file
+
+Then update the CodeCommit repository adding this file
+
+cp buildspec.yml ../hostname
+cd ../hostname
+git add buildspec.yml
+git commit -m 'Add buildspec'
+git push
+

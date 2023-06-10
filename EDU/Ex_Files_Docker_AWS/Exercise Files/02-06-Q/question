@@ -1,0 +1,5 @@
+Rightsizing the number of replicas of our 
+application is one of the key benefits of 
+a container-based application.
+How can we get another version of our task
+to run?

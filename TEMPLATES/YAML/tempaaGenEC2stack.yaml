@@ -1,0 +1,109 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: A test stack for demonstrating Templates in CloudFormation
+Parameters:
+  InstanceType:
+    Description: The instance type for the Launch Config
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+    - t2.nano
+    - t2.micro
+    - t2.small
+    - t2.medium
+    - t2.large
+  AMI:
+    Description: a reference to the AMI you want
+    Type: AWS::EC2::Image::Id
+    Default: ami-02396cdd13e9a1257
+  InstanceName:
+    Description: The Name tag that will get applied to the instance as per tagging policy.
+    Type: String
+    Default: Name
+Resources:
+  SecurityGroupaaSecGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allows SSH on port 22 and HTTP on port 80
+      GroupName: aaSecGroup
+      VpcId: vpc-056024b69e4bc0ec9
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+  MyInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash -xe
+          sudo amazon-linux-extras install -y nginx1
+          sudo service nginx start
+      ImageId: !Ref AMI
+      InstanceType:
+        Ref: InstanceType
+      KeyName: anzacair-260423
+      IamInstanceProfile: !Ref aaGenEC2systemsManagerConnectRole
+      SubnetId: subnet-0bd3b2ae752115610
+      BlockDeviceMappings:
+        - DeviceName: /dev/xvda
+          Ebs:
+            VolumeSize: 8
+            VolumeType: gp2
+            DeleteOnTermination: true
+      Tags:
+        - Key: Name
+          Value: !Ref InstanceName
+
+  aaGenSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: aaGenEC2 security group
+      VpcId: vpc-056024b69e4bc0ec9
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          CidrIp: 0.0.0.0/0
+
+  aaGenEC2systemsManagerConnectRole:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Path: /
+      Roles:
+        - !Ref aaGenEC2systemsManagerConnectRoleRole
+
+  aaGenEC2systemsManagerConnectRoleRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      Path: /
+      Policies:
+        - PolicyName: aaGenEC2systemsManagerConnectRolePolicy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ssm:DescribeAssociation
+                  - ssm:GetDeployablePatchSnapshotForInstance
+                  - ssm:GetManifest
+                  - ssm:GetParameters
+                  - ssm:ListInstanceAssociations
+                  - ssm:PutInventory
+                  - ssm:PutComplianceItems
+                  - ssm:PutConfigurePackageResult
+                  - ssm:UpdateAssociation
+
+
+

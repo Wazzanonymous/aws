@@ -1,0 +1,17 @@
+1.Overview of the case study.
+
+-Case study: Daydreams Travel Agency
+Mission statement:
+Daydreams offer value for money holidays you dream about through a large range of destinations, helpful agents and a smooth booking process that will get you up and away enjoying life quickly.
+
+-Daydreams Travel Agency employs eight staff members and operates on a $2,000,000 annual budget. At present, they operate out of a single small building in a suburban neighbourhood.
+ 
+-They have had success in the first three years of operation and now would like to expand by increasing the size of the physical location to accommodate 12 on-site employees.
+
+-Furthermore, understanding the modern businesses profiles, Daydreams Travel Agency perfectly adopt the idea of remote workers. This would save lots of resources and expenses, as well as achieving more exposure to clients nationwide. This is why the strategic plan proposes hiring 10 work-from-home sales personnel.
+
+-The CEO understands that their future success depends on their ability to capitalise on emerging technologies to satisfy their clients, but she knows very little about technology herself.
+ 
+-She has been advised by her IT consultant that the company’s computers, servers, and network are outdated and prone to failure. The team has been asked to write a report outlining what the company will need to do to expand.
+
+-In order to keep up with the competition, and stay abreast of emerging technologies, the CEO is in favour of retiring the company’s old servers and transitioning to a an AWS cloud-based network which would support all of the company’s current and future business needs. This would require a comprehensive plan to develop a virtual network solution in partnership with AWS services. This solution will include the schema and configuration of a virtual network, and appropriate peering connections to support the company’s operations.

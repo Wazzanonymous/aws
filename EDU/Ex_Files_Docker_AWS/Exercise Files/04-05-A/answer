@@ -1,0 +1,9 @@
+Assuming we've enabled ssh in our security
+group, and have defined our ec2 ssh key
+when we created the cluster:
+
+1) ensure we have a container task that 
+allows access
+2) ssh to the ec2 instance running the 
+resource and become root
+3) docker ps and docker exec

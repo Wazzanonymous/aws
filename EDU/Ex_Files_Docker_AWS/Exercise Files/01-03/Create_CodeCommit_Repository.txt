@@ -1,0 +1,12 @@
+https://console.aws.amazon.com/codesuite/codecommit/home
+
+Add ssh key ID to the local ssh config to support remote push/pull
+by creating (or adding the following stanza to) your ~/.ssh/config file
+Replace the all-caps parts of this stanza with those from either IAM or
+the SSH public key path as defined
+
+---
+Host git-codecommit.*.amazonaws.com
+  User IAM_SSH_ID
+  IdentityFile ~/.ssh/IAM_SSH_PRIVATE_KEY_FILE
+---

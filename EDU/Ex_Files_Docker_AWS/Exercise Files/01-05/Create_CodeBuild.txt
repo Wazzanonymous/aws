@@ -1,0 +1,8 @@
+Create a CodeBuild project to build the CodeCommit repository into a docker container
+
+In order to be able to push to ECR, we will need to update the service
+role that was created in the project wizard.  Add:
+AmazonEC2ContainerRegistryPowerUser
+to the role in the IAM console
+
+We should be able to build the latest master at this point.

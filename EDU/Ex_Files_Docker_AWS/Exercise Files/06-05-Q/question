@@ -1,0 +1,6 @@
+We looked at the logs at the service and
+task level, but can we find those logs in
+cloudwatch as well?  This would allow us
+to use cloudwatch specific searches to
+further refine our understanding of the
+system state.

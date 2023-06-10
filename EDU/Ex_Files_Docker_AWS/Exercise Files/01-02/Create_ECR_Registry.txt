@@ -1,0 +1,11 @@
+https://console.aws.amazon.com/ecr/
+
+export AWS_DEFAULT_REGION=us-west-2
+$(aws ecr get-login --no-include-email --region ${AWS_DEFAULT_REGION})
+
+
+source registry_tag.txt
+
+docker build . -t ${REGISTRY_TAG}
+
+docker push ${REGISTRY_TAG}

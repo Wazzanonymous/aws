@@ -1,0 +1,7 @@
+#--Format version-Identifies template capabilities (Latest template format version is 2010-09-09 and is currently the only valid value)
+AWSTemplateFormatVersion: "2010-09-09"  
+#--Description-Enables comments about the template
+Description: > 
+  Here are some
+  details about
+  the template.

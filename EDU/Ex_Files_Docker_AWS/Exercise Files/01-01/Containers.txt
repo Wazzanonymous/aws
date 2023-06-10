@@ -1,0 +1,22 @@
+Creating a Docker image (container template) is easy and requires the creation
+  of a Dockerfile. Let's look at an example.
+
+This simple example creates a local file in the container and serves it with the Nginx web server.  The file includes a version number that can be changed at build time (or run time) by passing an environment variable "VERSION" to the application.
+
+We can then build the instance:
+
+docker build . -t hostname:latest
+docker tag hostname:latest hostname:v1
+
+And then verify it's working:
+
+docker run --rm --name test -e VERSION=v2 -itd -p 8080:80 hostname:latest
+curl localhost:8080/version/
+
+Which should echo 'v2'
+
+And finaly clean up
+docker stop test
+docker rmi hostname:v1 hostname:latest
+
+

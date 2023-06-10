@@ -1,0 +1,9 @@
+Creating a shared volume requires both defining
+a task level share, and then associating that 
+with a path in the container(s) that need
+access to that resource.
+
+The hostname.sh script has been slightly modified
+to support appending the hostname and version
+to the hostname/index.html file
+

@@ -1,0 +1,79 @@
+Description: >
+    Template for  creating a single ec2 instance and an attached security group
+Parameters:
+
+    InstanceName:
+        Description: Name tag of the instance
+        Type: String
+    VPC:
+        Type: AWS::EC2::VPC::Id
+        Description:
+    Subnet:
+        Type: AWS::EC2::Subnet::Id
+        Description:
+    Contact:
+        Description: Contactact email
+        Default: foo@bar.com
+        Type: String
+    Keyname:
+        Description: Secret key used to remote into  an instance
+        Type: AWS::EC2::KeyPair::KeyName
+    InstanceAMI: ami-2023.0.20230419.0-kernel-6.1-x86_64
+        Description:
+        Type: t2.micro
+    InstanceType:
+        Description: ami-2023.0.20230419.0-kernel-6.1-x86_64
+        Default: t2.micro
+        AllowedValues:
+        - t2.nano
+        - t2.micro
+        - t2.small
+        - t3.nano
+        - t3.micro
+        - t3.small
+        - m1.medium
+    Type: String
+    
+
+
+
+
+
+
+
+Resources:
+---
+  MySecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow world HTTPS access to this instance
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+      FromPort: '443'
+      ToPort: '443'
+      CidrIp: 0.0.0.0/0
+---
+MyInstance:
+  Type: AWS::EC2::Instance
+  Properties:
+    ImageId:
+      Ref: InstanceAMI
+  InstanceType:
+    Ref: InstanceType
+  SecurityGroupIds:
+    - Ref: MySecurityGroup
+  SubnetId:
+    Ref: Subnet
+  Tags:
+    - Key: Contact
+      Value: !Ref Contact
+    - Key: Name
+      Value: !Ref InstanceName
+---
+
+Outputs:
+  InstanceID:
+  Description: The Instance ID
+  Value: !Ref MyInstance
+---

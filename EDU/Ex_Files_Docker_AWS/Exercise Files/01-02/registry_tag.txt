@@ -1,0 +1,3 @@
+export REGISTRY_TAG=946947244681.dkr.ecr.us-east-2.amazonaws.com/hostname
+
+//USE YOUR OWN REPOSITORY NAME

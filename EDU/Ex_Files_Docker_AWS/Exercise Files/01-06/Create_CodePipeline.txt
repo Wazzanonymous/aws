@@ -1,0 +1,3 @@
+We can further automate the build process by creating a code pipeline
+and letting the system automatically run the build process if our
+codecommit project is updated.

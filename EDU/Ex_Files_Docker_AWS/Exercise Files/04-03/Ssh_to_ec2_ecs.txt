@@ -1,0 +1,12 @@
+In order to gain access to the underlying resources
+we _must_ be using the EC2 type for our ECS clusters
+and in general you'd want to use the Linux variant
+rather than the Windows based cluster environment.
+
+Once that is established, and so long as you have 
+access to the private key that is the pair to the
+public key associated with the ec2 cluster on
+startup, you can:
+
+a) locate the public ENI for the EC2 instace
+b) ssh to ec2-user@eni-address

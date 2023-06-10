@@ -1,0 +1,48 @@
+4.Format of the case study
+
+-CASE STUDY TITLE
+
+Overview:
+(General Instructions:
+This written assessment contains three (3) parts:
+•	Section A – Design a virtual network
+•	Section B – Configure a virtual network and peering
+•	Section C – Configure virtual network peering
+
+The answers required for these tasks shall be written in plain English, using language that is understandable by a person of a technical level suitable for the case study. 
+)
+
+Specific Information:
+(•	computer applications currently used in industry 
+•	support resources, including online, manuals and training booklets
+•	a computer system with a suitable current OS and access to the internet
+•	information and data sources required to design and implement cloud infrastructure
+•	specific requirements and industry standards, organisational procedures and legislative requirements, including business and functionality requirements as well as retention/lifecycle business policy, as required
+•	retention/lifecycle policy example as it relates to managing cloud infrastructure
+•	data to gather information from to determine output and user requirements, including user access and business protocols.
+)
+
+Questions/Areas of Analysis:
+(Assessment Criteria:
+To achieve a satisfactory result, your assessor will be looking for your ability to demonstrate the following key skills/tasks/knowledge to an acceptable industry standard:
+•	deploy and configure at least 6 of the following different types of cloud resources, including but not limited to
+	virtual machines
+	container services
+	load balancers and autoscaling
+	serverless functions
+	API gateways
+	block or object storage
+	managed databases
+	DNS
+	content delivery networks
+•	use cloud management console, cloud software development kits or command line tools
+•	develop and execute test plans and demonstrate successful task completion
+•	consider procedural improvements to produce repeatable and automated deployments by reducing manual processes
+•	monitor and manage inventory, changes and lifecycle of at least one cloud resource
+•	use cloud management console, cloud software development kits or command line tools
+•	collect and analyse cloud and system data and adjust resources accordingly
+•	summarise ways system operations in cloud environments can be automated to minimise manual intervention.
+)
+
+Format and Structure of the Document:
+(Rich Text as MS Word .docx)

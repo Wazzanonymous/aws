@@ -1,0 +1,76 @@
+{
+    "plans": {
+        "PII_Backup_Plan": {
+            "rules": {
+                "My_Hourly_Rule": {
+                    "schedule_expression": {"@@assign": "cron(0 5 ? * * *)"},
+                    "start_backup_window_minutes": {"@@assign": "60"},
+                    "complete_backup_window_minutes": {"@@assign": "604800"},
+                    "enable_continuous_backup": {"@@assign": false},
+                    "target_backup_vault_name": {"@@assign": "My_Backup_Vault"},
+                    "recovery_point_tags": {
+                        "Owner": {
+                            "tag_key": {"@@assign": "Owner"},
+                            "tag_value": {"@@assign": "Backup"}
+                        }
+                    },
+                    "lifecycle": {
+                        "move_to_cold_storage_after_days": {"@@assign": "180"},
+                        "delete_after_days": {"@@assign": "270"}
+                    },
+                    "copy_actions": {
+                        "arn:aws:backup:us-west-2:$account:backup-vault:My_Secondary_Vault": {
+                            "target_backup_vault_arn": {
+                                "@@assign": "arn:aws:backup:us-west-2:$account:backup-vault:My_Secondary_Vault"
+                            },
+                            "lifecycle": {
+                                "move_to_cold_storage_after_days": {"@@assign": "180"},
+                                "delete_after_days": {"@@assign": "270"}
+                            }
+                        },
+                        "arn:aws:backup:us-east-1:$account:backup-vault:My_Tertiary_Vault": {
+                            "target_backup_vault_arn": {
+                                "@@assign": "arn:aws:backup:us-east-1:111111111111:backup-vault:My_Tertiary_Vault"
+                            },
+                            "lifecycle": {
+                                "move_to_cold_storage_after_days": {"@@assign": "180"},
+                                "delete_after_days": {"@@assign": "270"}
+                            }
+                        }
+                    }
+                }
+            },
+            "regions": {
+                "@@append": [
+                    "us-east-1",
+                    "eu-north-1"
+                ]
+            },
+            "selections": {
+                "tags": {
+                    "My_Backup_Assignment": {
+                        "iam_role_arn": {"@@assign": "arn:aws:iam::$account:role/MyIamRole"},
+                        "tag_key": {"@@assign": "dataType"},
+                        "tag_value": {
+                            "@@assign": [
+                                "PII",
+                                "RED"
+                            ]
+                        }
+                    }
+                }
+            },
+            "advanced_backup_settings": {
+                "ec2": {
+                    "windows_vss": {"@@assign": "enabled"}
+                }
+            },
+            "backup_plan_tags": {
+                "stage": {
+                    "tag_key": {"@@assign": "Stage"},
+                    "tag_value": {"@@assign": "Beta"}
+                }
+            }
+        }
+    }
+}

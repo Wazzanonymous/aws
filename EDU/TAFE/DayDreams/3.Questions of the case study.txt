@@ -1,0 +1,81 @@
+3.Questions of the case study.
+
+-Section A – Design a Virtual Network 
+(ICTCLD506_AT2_Design_warrenIkin.docx)
+
+NOTE: In Part 2 question 2.1 you will develop instructions for  a topology for the virtual network. You may want to return to the initial questions once you have completed that topology as it will be helpful in developing these solutions.
+
+Part 1 – Prepare to Design and Configure the Virtual Network
+In preparation, research cloud vendor service providers to identify sources of information that will be helpful in designing and configuring a virtual network in a cloud platform, including business and legislative requirements. In particular, focus on AWS as one of the industry leaders, to locate industry standards, procedures, and guidelines.
+ 
+1.1	List all of the networking requirements for Daydreams Travel Agency based on the business needs in the case study. List the cloud resources needed to meet these requirements.
+Business Needs	Cloud Resource	Comments
+Increased Storage 	Amazon S3	S3 standard single bucket in the local AWS region
+		
+
+1.2	Identify business and industry requirements. To do this, you will need to conduct research to investigate travel industry standards and guidelines, and state and Commonwealth legislation and frameworks. Also look at tourism industry associations e.g. Tourism Australia, Business Queensland, Australian Federation of Travel agents, etc. 
+
+1.3	Identify security options for the virtual network based on AWS tools. The table below will provide a basic framework for this task. Provide enough information that this table could be used as a guide for implementation of security tools.
+Security tool	Applied to …	Comments
+Amazon IAM	To control and monitor access and identity for all components	Identify users and roles before configuring IAM
+		
+
+-Section B – Configure a virtual network and peering
+(ICTCLD506_AT2_Configuration_warrenIkin.docx)
+
+2.1	List and describe the AWS tools, resources, gateways, and services required to build a multi-tier solution for the case study company. Use the table below as a framework. Use the third column to indicate the procedure or command you might use to achieve the implementation. You may add rows and columns as needed. Your completed table must address how you would use SSH and VPN to support the network.
+Tools/Resources Gateways/Services	Applied to …	How will you implement
+Amazon S3	Will provide storage for all DTA operations in the local geographical area	https://s3.region code.amazonaws.com.bucketname
+-
+2.2	Create instructions for a logical topology for your virtual network. Show your subnet scheme using the table below as a template. Add rows as needed.
+
+TOPOLOGY
+Components requiring IP addresses (including instances and gateways)	IP address	Subnet mask
+Amazon S3	192.168.2.1	255.255.255.0
+		
+		
+		
+
+2.3	Insert instructions to show how you have enabled the gateways and services according to the table in question 2.1. These can include dialog boxes from the AWS management console showing each activity, and/or operations taken at the command line interface. You may also show code fragments if you are using code in your development.
+
+2.4	Include Iinstructions to show how you have configured route tables and routing targets. This should align to the topology in question 2.1 and your subnetting scheme in question 2.2.
+
+2.5	Include instructions to show how you have configured security controls to support your virtual network. The configuration should align to the security controls that you listed in the table in question 1.3. 
+
+2.6	Include instructions to show how you have confirmed the expected flow of traffic through the virtual network. 
+2.6.1	Confirm network traffic is permitted to enter into the virtual network
+2.6.2	Confirm network traffic is permitted to travel through the virtual network
+2.6.3	Confirm network traffic is permitted to travel out of the virtual network 
+
+2.7	Include screen shots to show how you collected and monitored network traffic logs and other metrics. This can focus on collection and monitoring tasks using the AWS Cloudwatch tools that are available to you in the learning environment. 
+
+2.8	Referring to your findings in question 2.6: explain how the testing that you completed has confirmed external connectivity to resources within the virtual network, and how only permitted traffic was able to access that resource.
+
+2.9	Referring again to question 2.6: 
+a)	Describe one of the major problems that you encountered.
+b)	Describe the process you used to solve that problem.
+c)	What tools did you use? 
+d)	What was the step-by step-procedure that you followed (option to use a flow-chart - instructions)?
+e)	What did you learn from that problem solving experience?
+
+-Section C – Configure Virtual Network Peering
+(ICTCLD506_AT2_Peering_warrenIkin.docx)
+
+Part 3 – Establish Peering Connection between Two Virtual Networks 
+3.1	Include screen shots to show how you established a VPC peering connection between two VPCs. 
+	Your peering connection should allow routing of traffic between the two VPCs using private IPv4 addresses. 
+
+3.2	Include instructions to show how you adjusted routing tables to allow traffic between the two VPCs. 
+	Your peering connection should allow routing of traffic between the two VPCs using private IPv4 addresses. The route should point to the CIDR block (or portion of the CIDR block) of the peer VPC in the VPC peering connection and specify the VPC peering connection as the target.
+
+3.3	Create task sign-off letter which summarises the contents of the portfolio and presents your documents for review and approval. 
+Your sign-off sheet should be addressed to the Manager of the IT team for comment and/or approval.
+
+Completion and Submission
+Check all three of your portfolio documents:
+1.	ICTCLD506_AT2_Design_warrenIkin.docx
+2.	ICTCLD506_AT2_Configuration_warrenIkin.docx
+3.	ICTCLD506_AT2_Peering_warrenIkin.docx
+for consistency and accuracy. Proofread and edit the text as needed to assure proper sentence and paragraph structure. Check that the filenames are correct according to the list above. 
+At the end of the third document, check your task sign-off letter which should summarise the contents of the portfolio and present your documents for review and approval. 
+Your sign-off sheet should be addressed to the Manager of the IT team for comment and/or approval.

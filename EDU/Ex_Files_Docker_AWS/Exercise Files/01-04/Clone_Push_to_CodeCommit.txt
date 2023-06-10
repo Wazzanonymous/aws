@@ -1,0 +1,8 @@
+https://console.aws.amazon.com/codesuite/codecommit/home
+
+From the repository page, copy the ssh clone instructions
+
+cp code/* ../hostname/
+cd ../hostname
+git commit -am 'Initial commit'
+git push -u origin master
