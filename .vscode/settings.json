@@ -1,3 +1,4 @@
 {
-    "awsCfnAutoTemplateGenerator.templateFormat": "yaml"
+    "awsCfnAutoTemplateGenerator.templateFormat": "yaml",
+    "terminal.integrated.env.windows": {}
 }
