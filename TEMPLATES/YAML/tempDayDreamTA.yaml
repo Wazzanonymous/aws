@@ -1,0 +1,74 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: my-dta-bucket
+      Region: us-east-1
+
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      # Configure instance properties as per application requirements
+
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      # Configure VPC properties, subnets, route tables, and IGW
+
+  IAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      # Configure IAM role properties for user access and permissions
+
+  RDSInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      # Configure RDS instance properties for the application database
+
+  VPNSiteToSiteConnection:
+    Type: AWS::EC2::VPNConnection
+    Properties:
+      # Configure VPN connection properties for secure access to DTA's network resources
+
+  DirectConnectConnection:
+    Type: AWS::DirectConnect::Connection
+    Properties:
+      # Configure Direct Connect connection properties for dedicated network connection
+
+  Route53Record:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      # Configure Route 53 properties to manage DNS and direct end-user requests
+
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      # Configure CloudFront distribution properties for content delivery and security
+
+  CloudTrail:
+    Type: AWS::CloudTrail::Trail
+    Properties:
+      # Configure CloudTrail properties for governance, compliance, and auditing
+
+  CloudWatchAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Configure CloudWatch alarm properties for resource and application monitoring
+
+  EBSVolume:
+    Type: AWS::EC2::Volume
+    Properties:
+      # Configure EBS volume properties for persistent block storage
+
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      # Configure Lambda function properties for running serverless code
+
+  S3TransferAcceleration:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccelerateConfiguration:
+        AccelerationStatus: Enabled
