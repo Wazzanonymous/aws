@@ -1,0 +1,201 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: dDreamBkt-00
+      AccessControl: Private
+
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: <insert_ec2_ami_id>
+      InstanceType: <insert_ec2_instance_type>
+      KeyName: <insert_ec2_key_pair_name>
+      SecurityGroupIds:
+        - <insert_ec2_security_group_id>
+      SubnetId: <insert_ec2_subnet_id>
+
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: <insert_vpc_cidr_block>
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+
+  VPCGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref VPC
+      InternetGatewayId: !Ref InternetGateway
+
+  IAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      Path: /
+      Policies:
+        - PolicyName: DTAAccessPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: <insert_iam_actions>
+                Resource: <insert_iam_resource_arn>
+
+  RDSInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      AllocatedStorage: <insert_rds_allocated_storage>
+      DBInstanceIdentifier: <insert_rds_instance_identifier>
+      Engine: <insert_rds_engine>
+      EngineVersion: <insert_rds_engine_version>
+      MasterUsername: <insert_rds_master_username>
+      MasterUserPassword: <insert_rds_master_password>
+      VPCSecurityGroups:
+        - <insert_rds_security_group_id>
+
+  VPNSiteToSiteConnection:
+    Type: AWS::EC2::VPNConnection
+    Properties:
+      CustomerGatewayId: <insert_customer_gateway_id>
+      VpnGatewayId: !Ref VPCGatewayAttachment
+      Type: ipsec.1
+
+  DirectConnectConnection:
+    Type: AWS::DirectConnect::Connection
+    Properties:
+      Location: <insert_direct_connect_location>
+      Bandwidth: <insert_direct_connect_bandwidth>
+      ConnectionName: <insert_direct_connect_connection_name>
+
+  Route53Record:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneName: <insert_hosted_zone_name>
+      Name: <insert_route53_record_name>
+      Type: <insert_route53_record_type>
+      TTL: <insert_route53_record_ttl>
+      ResourceRecords:
+        - <insert_route53_resource_record>
+
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Origins:
+          - DomainName: <insert_cloudfront_origin_domain>
+            Id: <insert_cloudfront_origin_id>
+            S3OriginConfig:
+              OriginAccessIdentity: ''
+        DefaultCacheBehavior:
+          TargetOriginId: <insert_cloudfront_origin_id>
+          ViewerProtocolPolicy: redirect-to-https
+        Enabled: true
+
+  CloudTrailTrail:
+    Type: AWS::CloudTrail::Trail
+    Properties:
+      IsLogging: true
+      EnableLogFileValidation: true
+      IncludeGlobalServiceEvents: true
+      S3BucketName: !Ref S3Bucket
+
+  CloudWatchAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: <insert_cloudwatch_alarm_name>
+      ComparisonOperator: <insert_cloudwatch_comparison_operator>
+      EvaluationPeriods: <insert_cloudwatch_evaluation_periods>
+      MetricName: <insert_cloudwatch_metric_name>
+      Namespace: <insert_cloudwatch_namespace>
+      Period: <insert_cloudwatch_period>
+      Statistic: <insert_cloudwatch_statistic>
+      Threshold: <insert_cloudwatch_threshold>
+      AlarmDescription: <insert_cloudwatch_alarm_description>
+      AlarmActions:
+        - <insert_cloudwatch_alarm_action>
+
+  EBSEnabledInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: <insert_ec2_ami_id>
+      InstanceType: <insert_ec2_instance_type>
+      KeyName: <insert_ec2_key_pair_name>
+      SecurityGroupIds:
+        - <insert_ec2_security_group_id>
+      SubnetId: <insert_ec2_subnet_id>
+      BlockDeviceMappings:
+        - DeviceName: /dev/sda1
+          Ebs:
+            VolumeSize: <insert_ebs_volume_size>
+            VolumeType: <insert_ebs_volume_type>
+
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: <insert_lambda_function_name>
+      Handler: <insert_lambda_handler>
+      Role: <insert_lambda_role_arn>
+      Runtime: <insert_lambda_runtime>
+      Code:
+        ZipFile: <insert_lambda_code_zip>
+
+Outputs:
+  S3BucketName:
+    Value: !Ref S3Bucket
+    Description: S3 Bucket for DTA operations
+
+  EC2InstancePublicIP:
+    Value: !GetAtt EC2Instance.PublicIp
+    Description: Public IP of EC2 instance
+
+  VPCId:
+    Value: !Ref VPC
+    Description: ID of the created VPC
+
+  IAMRoleName:
+    Value: !GetAtt IAMRole.Arn
+    Description: Name of the IAM role
+
+  RDSInstanceEndpoint:
+    Value: !GetAtt RDSInstance.Endpoint.Address
+    Description: Endpoint of the RDS instance
+
+  VPNSiteToSiteConnectionId:
+    Value: !Ref VPNSiteToSiteConnection
+    Description: ID of the VPN Site-to-Site connection
+
+  DirectConnectConnectionId:
+    Value: !Ref DirectConnectConnection
+    Description: ID of the Direct Connect connection
+
+  Route53RecordName:
+    Value: <insert_route53_record_name>
+    Description: Name of the Route 53 record
+
+  CloudFrontDistributionDomainName:
+    Value: !GetAtt CloudFrontDistribution.DomainName
+    Description: Domain name of the CloudFront distribution
+
+  CloudTrailTrailName:
+    Value: !Ref CloudTrailTrail
+    Description: Name of the CloudTrail trail
+
+  CloudWatchAlarmName:
+    Value: !Ref CloudWatchAlarm
+    Description: Name of the CloudWatch alarm
+
+  LambdaFunctionName:
+    Value: !Ref LambdaFunction
+    Description: Name of the Lambda function
