@@ -1,0 +1,90 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Resources:
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      Tags:
+        - Key: Name
+          Value: DayDreams-VPC
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+
+  VPCGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref VPC
+      InternetGatewayId: !Ref InternetGateway
+
+  VPNConnection:
+    Type: AWS::EC2::VPNConnection
+    Properties:
+      CustomerGatewayId: <span style="color:red;"><insert_customer_gateway_id></span>
+      VpnGatewayId: !Ref VPCGatewayAttachment
+      Type: ipsec.1
+      Tags:
+        - Key: Name
+          Value: DayDreams-VPNConnection
+
+  VPNConnectionRoute:
+    Type: AWS::EC2::VPNConnectionRoute
+    Properties:
+      DestinationCidrBlock: 0.0.0.0/0
+      VpnConnectionId: !Ref VPNConnection
+
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: daydreams-storage-bucket
+      AccessControl: Private
+      Tags:
+        - Key: Name
+          Value: DayDreams-StorageBucket
+
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: <span style="color:red;"><insert_windows_11_ami_id></span>
+      InstanceType: <span style="color:red;"><insert_instance_type></span>
+      KeyName: <span style="color:red;"><insert_key_pair_name></span>
+      SecurityGroupIds:
+        - <span style="color:red;"><insert_security_group_id></span>
+      SubnetId: <span style="color:red;"><insert_subnet_id></span>
+
+  FileServer:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: <span style="color:red;"><insert_windows_2016_ami_id></span>
+      InstanceType: <span style="color:red;"><insert_instance_type></span>
+      KeyName: <span style="color:red;"><insert_key_pair_name></span>
+      SecurityGroupIds:
+        - <span style="color:red;"><insert_security_group_id></span>
+      SubnetId: <span style="color:red;"><insert_subnet_id></span>
+
+  RDSInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      AllocatedStorage: 256
+      DBInstanceIdentifier: DayDreamsDB
+      Engine: <span style="color:red;"><insert_database_engine></span>
+      EngineVersion: <span style="color:red;"><insert_database_version></span>
+      MasterUsername: <span style="color:red;"><insert_master_username></span>
+      MasterUserPassword: <span style="color:red;"><insert_master_password></span>
+      VPCSecurityGroups:
+        - <span style="color:red;"><insert_security_group_id></span>
+
+Outputs:
+  VPNEndpoint:
+    Value: !GetAtt VPNConnection.VpnGatewayId
+    Description: VPN Endpoint for secure access
+
+  StorageBucket:
+    Value: !Ref S3Bucket
+    Description: S3 Bucket for block storage
+
+  EC2InstancePublicIP:
+    Value: !GetAtt EC

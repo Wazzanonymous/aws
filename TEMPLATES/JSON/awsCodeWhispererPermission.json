@@ -1,0 +1,111 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sso-directory:ListMembersInGroup",
+                "sso-directory:SearchUsers",
+                "sso-directory:SearchGroups",
+                "sso-directory:GetUserPoolInfo",
+                "sso-directory:DescribeDirectory",
+                "sso:ListApplicationInstances",
+                "sso-directory:ListMembersInGroup"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sso:ListProfileAssociations",
+                "sso:ListProfiles",
+                "sso:GetSharedSsoConfiguration",
+                "sso:ListDirectoryAssociations",
+                "sso:DescribeRegisteredRegions",
+                "sso:GetSsoConfiguration",
+                "sso:GetManagedApplicationInstance",
+                "sso:UpdateSsoConfiguration",
+                "sso:AssociateDirectory",
+                "sso:AssociateProfile",
+                "sso:DisassociateProfile",
+                "sso:GetProfile",
+                "sso:GetSSOStatus",
+                "sso:CreateManagedApplicationInstance",
+                "sso:DeleteManagedApplicationInstance"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "identitystore:ListUsers",
+                "identitystore:ListGroups"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "organizations:DescribeAccount",
+                "organizations:DescribeOrganization"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "kms:ListAliases",
+                "kms:CreateGrant",
+                "kms:Encrypt",
+                "kms:Decrypt",
+                "kms:GenerateDataKey*",
+                "kms:RetireGrant",
+                "kms:DescribeKey"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "codeguru-security:UpdateAccountConfiguration"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateServiceLinkedRole"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "codewhisperer:CreateProfile",
+                "codewhisperer:UpdateProfile",
+                "codewhisperer:ListProfiles",
+                "codewhisperer:DeleteProfile",
+                "codewhisperer:TagResource",
+                "codewhisperer:UnTagResource",
+                "codewhisperer:ListTagsForResource"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}
