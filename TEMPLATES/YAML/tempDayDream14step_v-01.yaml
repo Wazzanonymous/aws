@@ -10,12 +10,12 @@ Resources:
   EC2Instance:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: <insert_ec2_ami_id>
-      InstanceType: <insert_ec2_instance_type>
-      KeyName: <insert_ec2_key_pair_name>
+      ImageId: "ami-022e1a32d3f742bd8"
+      InstanceType: t2.micro
+      KeyName: "ddream"
       SecurityGroupIds:
-        - <insert_ec2_security_group_id>
-      SubnetId: <insert_ec2_subnet_id>
+        - "sg-07f1ae644904bd433"
+      SubnetId:
 
   VPC:
     Type: AWS::EC2::VPC
