@@ -26,15 +26,15 @@ Questions/Areas of Analysis:
 (Assessment Criteria:
 To achieve a satisfactory result, your assessor will be looking for your ability to demonstrate the following key skills/tasks/knowledge to an acceptable industry standard:
 •	deploy and configure at least 6 of the following different types of cloud resources, including but not limited to
-	virtual machines
-	container services
-	load balancers and autoscaling
-	serverless functions
-	API gateways
-	block or object storage
-	managed databases
-	DNS
-	content delivery networks
+	virtual machines
+	container services
+	load balancers and autoscaling
+	serverless functions
+	API gateways
+	block or object storage
+	managed databases
+	DNS
+	content delivery networks
 •	use cloud management console, cloud software development kits or command line tools
 •	develop and execute test plans and demonstrate successful task completion
 •	consider procedural improvements to produce repeatable and automated deployments by reducing manual processes
