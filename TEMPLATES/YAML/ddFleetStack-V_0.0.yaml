@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: AWS SaaS Solution with 64 Scalable Spot Instances
+
+Resources:
+  SpotFleetRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service: "spotfleet.amazonaws.com"
+            Action: "sts:AssumeRole"
+      Path: "/"
+      Policies:
+        - PolicyName: "SpotFleetRolePolicy"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "ec2:DescribeInstances"
+                  - "ec2:RequestSpotInstances"
+                  - "ec2:TerminateInstances"
+                Resource: "*"
+
+  SpotFleet:
+    Type: "AWS::EC2::SpotFleet"
+    Properties:
+      SpotFleetRequestConfigData:
+        IamFleetRole: !Ref SpotFleetRole
+        TargetCapacity: 64
+        SpotPrice: "0.05"  # Adjust the spot price as needed
+        LaunchSpecifications:
+          - ImageId: "ami-12345678"  # Replace with your desired AMI ID
+            InstanceType: "t3.medium"  # Replace with your desired instance type
+            KeyName: "your-key-pair-name"  # Replace with your key pair name
+            SecurityGroups:
+              - "your-security-group-name"  # Replace with your security group name
+            SubnetId: "your-subnet-id"  # Replace with your subnet ID
+            WeightedCapacity: 1
+
+Outputs:
+  SpotFleetRequestId:
+    Description: "Spot Fleet Request ID"
+    Value: !Ref SpotFleet
