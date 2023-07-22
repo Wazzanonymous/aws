@@ -1,0 +1,47 @@
+{
+    "IamFleetRole": "arn:aws:iam::934425205854:role/aws-ec2-spot-fleet-tagging-role",
+    "AllocationStrategy": "priceCapacityOptimized",
+    "TargetCapacity": 32,
+    "ValidFrom": "2023-07-22T01:55:32.000Z",
+    "ValidUntil": "2024-07-22T01:55:32.000Z",
+    "TerminateInstancesWithExpiration": true,
+    "Type": "maintain",
+    "TargetCapacityUnitType": "units",
+    "SpotMaintenanceStrategies": {
+        "CapacityRebalance": {
+            "ReplacementStrategy": "launch"
+        }
+    },
+    "SpotMaxTotalPrice": "32",
+    "InstanceInterruptionBehavior": "hibernate",
+    "SpotPrice": "1.3438",
+    "LaunchSpecifications": [
+        {
+            "ImageId": "ami-04823729c75214919",
+            "KeyName": "daydream",
+            "BlockDeviceMappings": [
+                {
+                    "DeviceName": "/dev/xvda",
+                    "Ebs": {
+                        "DeleteOnTermination": true,
+                        "SnapshotId": "snap-02f54566c0793da5a",
+                        "VolumeSize": 8,
+                        "VolumeType": "gp2",
+                        "Encrypted": false
+                    }
+                }
+            ],
+            "SubnetId": "subnet-05fefd29d580bd3ca, subnet-08a813e152d1b5c54",
+            "InstanceRequirements": {
+                "VCpuCount": {
+                    "Min": 4,
+                    "Max": 8
+                },
+                "MemoryMiB": {
+                    "Min": 16384,
+                    "Max": 32768
+                }
+            }
+        }
+    ]
+}
