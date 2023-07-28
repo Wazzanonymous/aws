@@ -1,0 +1,229 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation Template for Business Needs
+
+Parameters:
+  InstanceType:
+    Description: EC2 instance type for scalable computing power
+    Type: String
+    Default: t2.micro
+    AllowedValues: [t2.micro, t2.small, t2.medium, ...] # Add more allowed values as needed
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: my-increased-storage-bucket
+      AccessControl: Private
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - BucketKeyEnabled: true
+      VersioningConfiguration:
+        Status: Enabled
+
+  EC2InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security Group for EC2 instances
+      VpcId: !Ref VPC
+
+  EC2Instances:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      ImageId: ami-xxxxxxxxxxxxxxxxx # Replace with the desired EC2 image ID
+      SecurityGroupIds:
+        - !Ref EC2InstanceSecurityGroup
+      MinCount: 1
+      MaxCount: 2
+
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16 # Replace with your desired VPC CIDR range
+
+  IAMUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: my-iam-user
+
+  IAMGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: my-iam-group
+
+  IAMPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: my-iam-policy
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action: '*'
+            Resource: '*'
+      Groups:
+        - !Ref IAMGroup
+
+  RDSInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: my-database-instance
+      Engine: mysql # Replace with the desired database engine
+      EngineVersion: "x.x.x" # Replace with the desired database engine version
+      DBInstanceClass: db.t2.micro # Replace with the desired database instance type
+      AllocatedStorage: 20 # Replace with the desired storage size
+      MultiAZ: false
+      MasterUsername: mydbadmin
+      MasterUserPassword: mydbpassword
+      VPCSecurityGroups:
+        - !GetAtt EC2InstanceSecurityGroup.GroupId
+
+  VPNGateway:
+    Type: AWS::EC2::VPNGateway
+    Properties:
+      Type: ipsec.1
+
+  VPNConnection:
+    Type: AWS::EC2::VPNConnection
+    Properties:
+      Type: ipsec.1
+      CustomerGatewayId: cgw-xxxxxxxxxxxxxxxxx # Replace with your Customer Gateway ID
+      VpnGatewayId: vgw-xxxxxxxxxxxxxxxxx # Replace with your VPN Gateway ID
+      StaticRoutesOnly: true
+
+  DirectConnectGateway:
+    Type: AWS::EC2::DirectConnectGateway
+
+  DirectConnectAttachment:
+    Type: AWS::EC2::DirectConnectGatewayAttachment
+    Properties:
+      DirectConnectGatewayId: !Ref DirectConnectGateway
+      VpcId: !Ref VPC
+
+  Route53HostedZone:
+    Type: AWS::Route53::HostedZone
+    Properties:
+      Name: mydomain.com
+
+  Route53RecordSet:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref Route53HostedZone
+      Name: mydomain.com
+      Type: A
+      AliasTarget:
+        HostedZoneId: !GetAtt EC2Instances.AvailabilityZone
+        DNSName: !GetAtt EC2Instances.PublicIp
+
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Origins:
+          - DomainName: !GetAtt S3Bucket.RegionalDomainName
+            Id: MyS3Origin
+            S3OriginConfig:
+              OriginAccessIdentity: ''
+        DefaultCacheBehavior:
+          TargetOriginId: MyS3Origin
+          ForwardedValues:
+            QueryString: 'false'
+            Cookies:
+              Forward: none
+        DefaultRootObject: index.html
+        Enabled: 'true'
+        Comment: CloudFront distribution for my S3 bucket
+
+  CloudTrail:
+    Type: AWS::CloudTrail::Trail
+    Properties:
+      IsLogging: true
+      EnableLogFileValidation: true
+
+  CloudWatchLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: my-cloudwatch-log-group
+
+  CloudWatchAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: my-cloudwatch-alarm
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      EvaluationPeriods: '1'
+      MetricName: CPUUtilization
+      Namespace: AWS/EC2
+      Period: '60'
+      Statistic: Average
+      Threshold: '80'
+      AlarmDescription: Alarm when CPU utilization exceeds 80% for 1 minute
+      AlarmActions:
+        - !Ref IAMUser
+      Dimensions:
+        - Name: InstanceId
+          Value: !Ref EC2Instances
+
+  EBSVolume:
+    Type: AWS::EC2::Volume
+    Properties:
+      Size: 20
+      AvailabilityZone: !GetAtt EC2Instances.AvailabilityZone
+
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: my-lambda-function
+      Handler: index.handler
+      Role: !GetAtt IAMRole.Arn
+      Code:
+        ZipFile: |
+          console.log('Hello, Lambda!');
+      Runtime: nodejs14.x
+
+  IAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+
+Outputs:
+  S3BucketName:
+    Description: S3 Bucket for increased storage
+    Value: !Ref S3Bucket
+
+  EC2InstanceIDs:
+    Description: Instance IDs of EC2 instances
+    Value: !Join [",", !GetAtt EC2Instances.InstanceIds]
+
+  DatabaseEndpoint:
+    Description: Endpoint URL of the database instance
+    Value: !GetAtt RDSInstance.Endpoint.Address
+
+  VPNConnectionId:
+    Description: VPN Connection ID
+    Value: !Ref VPNConnection
+
+  VPCId:
+    Description: VPC ID
+    Value: !Ref VPC
+
+  CloudFrontDistributionDomain:
+    Description: CloudFront Distribution Domain Name
+    Value: !GetAtt CloudFrontDistribution.DomainName
+
+  CloudTrailARN:
+    Description: CloudTrail ARN
+    Value: !GetAtt CloudTrail.Arn
+
+  CloudWatchAlarmName:
+    Description: CloudWatch Alarm Name
+    Value: !Ref CloudWatchAlarm
+
+  LambdaFunctionARN:
+    Description: Lambda Function ARN
+    Value: !GetAtt LambdaFunction.Arn
