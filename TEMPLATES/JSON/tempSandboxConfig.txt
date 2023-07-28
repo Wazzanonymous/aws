@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Academy Cloud Operations Sandbox
+
+Resources:
+
+  SsmRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: AmazonSSMRoleForInstancesQuickSetup
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore'
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: /
+      Policies:
+        - PolicyName: ReadParameterStore
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action: ssm:*
+                Resource: 'arn:aws:ssm:*:*:parameter/*'
+        - PolicyName: AttachRoleToInstance
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - iam:CreateInstanceProfile
+                  - ec2:AssociateIamInstanceProfile
+                  - iam:AddRoleToInstanceProfile
+                Resource: '*'
+  SsmRoleInstanceProfile:
+    Type: 'AWS::IAM::InstanceProfile'
+    Properties:
+      Path: /
+      Roles:
+        - !Ref SsmRole
