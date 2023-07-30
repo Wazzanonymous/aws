@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" width="100px" height="100px" xml:space="preserve">
+<polygon fill="#4A8FCC" points="79.808,62.657 49.999,58.951 20.192,62.657 49.999,71.601 "/>
+<polygon fill="#072D4A" points="79.808,37.343 49.999,41.049 20.192,37.343 49.999,28.4 "/>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="20.1924" y1="25.6714" x2="50" y2="25.6714">
+	<stop  offset="0" style="stop-color:#072E4B"/>
+	<stop  offset="1" style="stop-color:#2D72B8"/>
+</linearGradient>
+<polygon fill="url(#SVGID_1_)" points="50,14 20.192,28.904 20.192,37.343 50,28.4 "/>
+<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="20.1924" y1="74.3291" x2="50" y2="74.3291">
+	<stop  offset="0" style="stop-color:#072E4B"/>
+	<stop  offset="1" style="stop-color:#2D72B8"/>
+</linearGradient>
+<polygon fill="url(#SVGID_2_)" points="50,71.6 20.192,62.658 20.192,71.096 50,86 "/>
+<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="37.3994" y1="50.0874" x2="50" y2="50.0874">
+	<stop  offset="0" style="stop-color:#072E4B"/>
+	<stop  offset="1" style="stop-color:#2D72B8"/>
+</linearGradient>
+<polygon fill="url(#SVGID_3_)" points="50,60.888 37.399,58.983 37.399,41.162 50,39.287 "/>
+<polygon fill="#2D72B8" points="50,14 79.808,28.904 79.808,37.343 50,28.4 "/>
+<polygon fill="#2D72B8" points="50,71.6 79.808,62.658 79.808,71.096 50,86 "/>
+<polygon fill="#2D72B8" points="50,60.888 62.601,58.983 62.601,41.162 50,39.287 "/>
+<circle fill="#BE202E" cx="69.856" cy="68.993" r="21.938"/>
+<g id="g17038_2_" transform="translate(8884.1409,-30215.235)">
+	<path id="rect10076_2_" fill="#FFFFFF" d="M-8822.22,30280.879c-0.914,0-1.649,0.734-1.649,1.648v13.191
+		c0,0.914,0.735,1.65,1.649,1.65h15.871c0.914,0,1.648-0.736,1.648-1.65v-13.191c0-0.914-0.734-1.648-1.648-1.648H-8822.22z
+		 M-8814.284,30285.354c1.224,0,2.214,0.99,2.214,2.213c0,0.854-0.481,1.592-1.187,1.963v3.582c0,0.57-0.458,1.027-1.027,1.027
+		c-0.568,0-1.026-0.457-1.026-1.027v-3.582c-0.706-0.371-1.188-1.109-1.188-1.963
+		C-8816.498,30286.344-8815.507,30285.354-8814.284,30285.354z"/>
+	<path id="rect10867_2_" fill="#FFFFFF" d="M-8814.284,30271.086c-3.809,0-7.151,2.729-7.151,6.377v2.707h3.286v-2.707
+		c0-1.598,1.572-3.092,3.865-3.092s3.863,1.494,3.863,3.092v2.707h3.286v-2.707
+		C-8807.135,30273.814-8810.476,30271.086-8814.284,30271.086z"/>
+</g>
+</svg>

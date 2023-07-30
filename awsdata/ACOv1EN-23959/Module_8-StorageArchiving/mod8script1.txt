@@ -1,0 +1,239 @@
+SecretKey	NHWPqDLnfCG0FzrqnKGPQtUv/mgBylIbW/69nFXX
+someoutput	{"Connection": "ssh ec2-user@54.224.60.42"}
+AccessKey	AKIAXPYSC2SGL3QEYVHE
+54.198.238.138
+==============================================================================
+~]$ aws ec2 describe-instances --filter 'Name=tag:Name,Values=Processor'
+
+{
+    "Reservations": [
+        {
+            "Groups": [],
+            "Instances": [
+                {
+                    "AmiLaunchIndex": 0,
+                    "ImageId": "ami-0464d49b8794eba32",
+                    "InstanceId": "i-0cd697738688a27be",
+                    "InstanceType": "t2.micro",
+                    "KeyName": "vockey",
+                    "LaunchTime": "2022-10-01T03:38:37.000Z",
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "Placement": {
+                        "AvailabilityZone": "us-east-1a",
+                        "GroupName": "",
+                        "Tenancy": "default"
+                    },
+                    "PrivateDnsName": "ip-10-5-0-182.ec2.internal",
+                    "PrivateIpAddress": "10.5.0.182",
+                    "ProductCodes": [],
+                    "PublicDnsName": "ec2-54-198-238-138.compute-1.amazonaws.com",
+                    "PublicIpAddress": "54.198.238.138",
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "StateTransitionReason": "",
+                    "SubnetId": "subnet-0749220a0df7a9340",
+                    "VpcId": "vpc-092eab2064c8c9049",
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/xvda",
+                            "Ebs": {
+                                "AttachTime": "2022-10-01T03:38:37.000Z",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-0336956dfe247dc20"
+                            }
+                        }
+                    ],
+                    "ClientToken": "c5956-Proce-B4NQV8F20WPO",
+                    "EbsOptimized": false,
+                    "EnaSupport": true,
+                    "Hypervisor": "xen",
+                    "IamInstanceProfile": {
+                        "Arn": "arn:aws:iam::514897138828:instance-profile/S3BucketAccess",
+                        "Id": "AIPAXPYSC2SGKA6UIZQVA"
+                    },
+                    "NetworkInterfaces": [
+                        {
+                            "Association": {
+                                "IpOwnerId": "amazon",
+                                "PublicDnsName": "ec2-54-198-238-138.compute-1.amazonaws.com",
+                                "PublicIp": "54.198.238.138"
+                            },
+                            "Attachment": {
+                                "AttachTime": "2022-10-01T03:38:37.000Z",
+                                "AttachmentId": "eni-attach-09e5ee0415373911e",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached",
+                                "NetworkCardIndex": 0
+                            },
+                            "Description": "",
+                            "Groups": [
+                                {
+                                    "GroupName": "c59569a1067419l2762170t1w514897138828-SSHAccess-1LO138ZW2TC0Q",
+                                    "GroupId": "sg-0c2a3fd8a64ee67d7"
+                                }
+                            ],
+                            "Ipv6Addresses": [],
+                            "MacAddress": "0e:46:16:0b:cc:53",
+                            "NetworkInterfaceId": "eni-02cc2f1fcaed8a73b",
+                            "OwnerId": "514897138828",
+                            "PrivateDnsName": "ip-10-5-0-182.ec2.internal",
+                            "PrivateIpAddress": "10.5.0.182",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Association": {
+                                        "IpOwnerId": "amazon",
+                                        "PublicDnsName": "ec2-54-198-238-138.compute-1.amazonaws.com",
+                                        "PublicIp": "54.198.238.138"
+                                    },
+                                    "Primary": true,
+                                    "PrivateDnsName": "ip-10-5-0-182.ec2.internal",
+                                    "PrivateIpAddress": "10.5.0.182"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-0749220a0df7a9340",
+                            "VpcId": "vpc-092eab2064c8c9049",
+                            "InterfaceType": "interface"
+                        }
+                    ],
+                    "RootDeviceName": "/dev/xvda",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupName": "c59569a1067419l2762170t1w514897138828-SSHAccess-1LO138ZW2TC0Q",
+                            "GroupId": "sg-0c2a3fd8a64ee67d7"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Tags": [
+                        {
+                            "Key": "cloudlab",
+                            "Value": "c59569a1067419l2762170t1w514897138828"
+                        },
+                        {
+                            "Key": "aws:cloudformation:stack-id",
+                            "Value": "arn:aws:cloudformation:us-east-1:514897138828:stack/c59569a1067419l2762170t1w514897138828/260c1cb0-413a-11ed-81e5-12c701524fad"
+                        },
+                        {
+                            "Key": "Name",
+                            "Value": "Processor"
+                        },
+                        {
+                            "Key": "aws:cloudformation:stack-name",
+                            "Value": "c59569a1067419l2762170t1w514897138828"
+                        },
+                        {
+                            "Key": "aws:cloudformation:logical-id",
+                            "Value": "ProcessorHostInstance"
+                        }
+                    ],
+                    "VirtualizationType": "hvm",
+                    "CpuOptions": {
+                        "CoreCount": 1,
+                        "ThreadsPerCore": 1
+                    },
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "MetadataOptions": {
+                        "State": "applied",
+                        "HttpTokens": "optional",
+                        "HttpPutResponseHopLimit": 1,
+                        "HttpEndpoint": "enabled",
+                        "HttpProtocolIpv6": "disabled",
+                        "InstanceMetadataTags": "disabled"
+                    },
+                    "EnclaveOptions": {
+                        "Enabled": false
+                    },
+                    "PlatformDetails": "Linux/UNIX",
+                    "UsageOperation": "RunInstances",
+                    "UsageOperationUpdateTime": "2022-10-01T03:38:37.000Z",
+                    "PrivateDnsNameOptions": {
+                        "HostnameType": "ip-name",
+                        "EnableResourceNameDnsARecord": false,
+                        "EnableResourceNameDnsAAAARecord": false
+                    },
+                    "MaintenanceOptions": {
+                        "AutoRecovery": "default"
+                    }
+                }
+            ],
+            "OwnerId": "514897138828",
+            "RequesterId": "043234062703",
+            "ReservationId": "r-0a95ee10fa9121845"
+        }
+    ]
+}
+[ec2-user@ip-10-5-0-182 ~]$ aws ec2 describe-instances --filter 'Name=tag:Name,Values=Processor' --query 'Reservations[0].Instances[0].BlockDeviceMappings[0].Ebs.{VolumeId:VolumeId}'
+
+"VolumeId": "vol-0336956dfe247dc20"
+
+aws ec2 describe-instances --filters 'Name=tag:Name,Values=Processor' --query 'Reservations[0].Instances[0].InstanceId'
+
+"i-0cd697738688a27be"
+
+39.aws ec2 stop-instances --instance-ids "i-0cd697738688a27be"
+
+40.aws ec2 wait instance-stopped --instance-id "i-0cd697738688a27be"
+
+41.aws ec2 create-snapshot --volume-id VOLUME-ID
+
+================================================================================
+
+45.echo "* * * * *  aws ec2 create-snapshot --volume-id VOLUME-ID 2>&1 >> /tmp/cronlog" > cronjob
+
+ 46.crontab cronjob
+ 
+ 47.aws ec2 describe-snapshots --filters "Name=volume-id,Values=<volume-id>"
+ 
+ 49.crontab -r
+ 
+ 50.more snapshotter_v2.py
+ 
+ 51.aws ec2 describe-snapshots --filters "Name=volume-id, Values=VOLUME-ID" --query 'Snapshots[*].SnapshotId'
+ 
+ 52.python3 snapshotter_v2.py
+ 
+ 53.aws ec2 describe-snapshots --filters "Name=volume-id, Values=<volume-id>" --query 'Snapshots[*].SnapshotId'
+ =============================================================================
+ Run this command on the EC2 instance to download a sample set of files:
+
+wget https://aws-tc-largeobjects.s3-us-west-2.amazonaws.com/CUR-TF-200-RESOPS/lab5vocareum/files.zip
+
+56.wget https://aws-tc-largeobjects.s3-us-west-2.amazonaws.com/CUR-TF-200-RESOPS/lab5vocareum/files.zip
+
+57.unzip files.zip
+
+58.aws s3api put-bucket-versioning --bucket S3-BUCKET-NAME --versioning-configuration Status=Enabled
+
+59.aws s3 sync files s3://S3-BUCKET-NAME/files/
+
+60.aws s3 ls s3://S3-BUCKET-NAME/files/
+
+61.rm files/file1.txt
+
+62.aws s3 sync files s3://S3-BUCKET-NAME/files/ --delete
+
+63.aws s3 ls s3://S3-BUCKET-NAME/files/
+
+64.aws s3api list-object-versions --bucket S3-BUCKET-NAME --prefix files/file1.txt
+
+65.aws s3api get-object --bucket S3-BUCKET-NAME --key files/file1.txt --version-id VERSION-ID files/file1.txt
+66.ls files
+
+67.aws s3 sync files s3://S3-BUCKET-NAME/files/
+
+68.aws s3 ls s3://S3-BUCKET-NAME/files/
+

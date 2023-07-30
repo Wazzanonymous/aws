@@ -1,0 +1,85 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Infrastructure Stack for the described criteria.",
+    "Resources": {
+      "MyS3Bucket": {
+        "Type": "AWS::S3::Bucket",
+        "Properties": {
+          "BucketName": "my-s3-bucket"
+          // Add other S3 bucket properties as needed
+        }
+      },
+  
+      "MyIAMRole": {
+        "Type": "AWS::IAM::Role",
+        "Properties": {
+          "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Principal": {
+                  "Service": "ec2.amazonaws.com"
+                },
+                "Action": "sts:AssumeRole"
+              }
+            ]
+          },
+          // Add IAM role policies as needed
+        }
+      },
+  
+      "MyEC2Instance": {
+        "Type": "AWS::EC2::Instance",
+        "Properties": {
+          "ImageId": "ami-xxxxxx",
+          "InstanceType": "t2.micro",
+          "SecurityGroups": ["MySecurityGroup"],
+          "KeyName": "my-key-pair",
+          "UserData": {
+            "Fn::Base64": {
+              // Add user data scripts here for EC2 instance setup
+            }
+          }
+        }
+      },
+  
+      "MySecurityGroup": {
+        "Type": "AWS::EC2::SecurityGroup",
+        "Properties": {
+          // Add Security Group rules as needed
+        }
+      },
+  
+      // Add more resources for NetworkACLs, Shield, WAF, RDS, WorkMail, VPN, DirectConnect, Route53, CloudFront, etc.
+  
+      "MyEC2InstanceEIPAssociation": {
+        "Type": "AWS::EC2::EIPAssociation",
+        "Properties": {
+          "InstanceId": { "Ref": "MyEC2Instance" },
+          "EIP": "xx.xx.xx.xx"
+        }
+      },
+  
+      "MyLambdaFunction": {
+        "Type": "AWS::Lambda::Function",
+        "Properties": {
+          // Add Lambda function properties as needed
+        }
+      },
+  
+      "MyEBSVolume": {
+        "Type": "AWS::EC2::Volume",
+        "Properties": {
+          // Add EBS volume properties as needed
+        }
+      },
+  
+      // Add more resources for CloudFront, S3TransferAcceleration, CloudWatch, VPCFlowLogs, Backup, Macie, KMSCrypto, ACM, etc.
+  
+    },
+    "Outputs": {
+      // Add outputs for any important information you want to display
+    }
+  }
+  

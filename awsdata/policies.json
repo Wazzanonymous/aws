@@ -1,0 +1,101 @@
+{
+   "chromeMetadata": {
+      "OS": "Windows 10 Version 21H2 (Build 19044.1949)",
+      "application": "Microsoft Edge",
+      "revision": "4122bb4646b33f33bca5d269490b9caadfc452b2",
+      "version": "105.0.1343.33 (Official build) (64-bit)"
+   },
+   "edgePolicies": {
+      "AddressBarMicrosoftSearchInBingProviderEnabled": {
+         "level": "mandatory",
+         "scope": "user",
+         "source": "platform",
+         "value": false
+      },
+      "AutofillAddressEnabled": {
+         "level": "mandatory",
+         "scope": "user",
+         "source": "platform",
+         "value": false
+      },
+      "AutofillCreditCardEnabled": {
+         "info": "This policy is working as intended but the same value is set elsewhere and is superseded by this policy.",
+         "level": "mandatory",
+         "scope": "machine",
+         "source": "platform",
+         "superseded": [ {
+            "level": "mandatory",
+            "scope": "user",
+            "source": "platform",
+            "value": false
+         } ],
+         "value": false
+      },
+      "ConfigureDoNotTrack": {
+         "level": "mandatory",
+         "scope": "user",
+         "source": "platform",
+         "value": true
+      },
+      "LocalProvidersEnabled": {
+         "level": "mandatory",
+         "scope": "user",
+         "source": "platform",
+         "value": false
+      },
+      "MetricsReportingEnabled": {
+         "error": "Unknown policy.",
+         "ignored": true,
+         "level": "mandatory",
+         "scope": "user",
+         "source": "platform",
+         "value": 0
+      },
+      "PaymentMethodQueryEnabled": {
+         "level": "mandatory",
+         "scope": "user",
+         "source": "platform",
+         "value": false
+      },
+      "PersonalizationReportingEnabled": {
+         "level": "mandatory",
+         "scope": "user",
+         "source": "platform",
+         "value": false
+      },
+      "SearchSuggestEnabled": {
+         "level": "mandatory",
+         "scope": "user",
+         "source": "platform",
+         "value": false
+      },
+      "SendSiteInfoToImproveServices": {
+         "error": "Unknown policy.",
+         "level": "mandatory",
+         "scope": "user",
+         "source": "platform",
+         "value": 0
+      },
+      "UserFeedbackAllowed": {
+         "info": "This policy is working as intended but the same value is set elsewhere and is superseded by this policy.",
+         "level": "mandatory",
+         "scope": "machine",
+         "source": "platform",
+         "superseded": [ {
+            "level": "mandatory",
+            "scope": "user",
+            "source": "platform",
+            "value": false
+         } ],
+         "value": false
+      }
+   },
+   "extensionPolicies": {
+   },
+   "status": {
+      "updater": {
+         "timeSinceLastRefresh": "4 hours ago",
+         "version": "1.3.167.21"
+      }
+   }
+}

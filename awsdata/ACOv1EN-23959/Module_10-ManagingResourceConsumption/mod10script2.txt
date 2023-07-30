@@ -1,0 +1,36 @@
+
+SecretKey	lKdGPDE4zKuBOSCr1ooO4E2sJtGN9p2rj4tak8jA
+MomPopCafePublicIP	54.175.57.45
+CliHostPublicIP	3.93.168.123
+AccessKey	AKIA5QLNRDBCCPTFCH7F
+"InstanceId": "i-0a7545e8491751ad7", Instance ID:i-0a7545e8491751ad7 
+aws ec2 stop-instances --instance-ids MomPopCafeInstance Instance ID:i-0a7545e8491751ad7 
+==============================================================================
+login as: ec2-user
+Authenticating with public key "imported-openssh-key"
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux 2 AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-2/
+[ec2-user@cli-host ~]$ curl http://169.254.169.254/latest/dynamic/instance-identity/document | grep region
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   476  100   476    0     0  78794      0 --:--:-- --:--:-- --:--:-- 95200
+  "region" : "us-east-1",
+[ec2-user@cli-host ~]$sudo systemctl stop mariadb
+
+aws ec2 describe-instances \
+
+--filters "Name=tag:Name,Values= MomPopCafeInstance" \
+
+--query "Reservations[*].Instances[*].InstanceId"
+
+aws ec2 modify-instance-attribute \
+
+--instance-id i-0a7545e8491751ad7 \
+
+--instance-type "{\"Value\": \"t2.micro\"}"
+
+aws ec2 start-instances --instance-ids <MomPopCafeInstance Instance ID>

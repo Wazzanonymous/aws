@@ -1,0 +1,279 @@
+#SecretKey	znkBOsZyS4Rsc0H/qYhwvIRucc7NleFzRa/+da07
+#PublicIP	54.234.157.123
+#AccessKey	AKIARVZHSO2CC6YPHHH5
+-------------------------------------------------------
+#Cloud Access
+AWS CLI:   
+Copy and paste the following into ~/.aws/credentials
+[default]
+aws_access_key_id=ASIARVZHSO2CHZ3PQOBM
+aws_secret_access_key=Djpt52TpOIZ1Sghz9NiaDCLaGzClBkncqjvHkSa7
+aws_session_token=FwoGZXIvYXdzEGMaDEgyz6NzlRkOa4AdayK8ARfr1i79dV+RN+p43ydoOho07TSsA0Y9XE5fJ+3dtVPSYrABJzTbyP/2LSasSoG6VPX7U4PRJMD6Jl5JzwUO/M/2U7EENqabQZoXXK5J9ZeEw0/okR6gdsV6UAnmYeq0KSvRkWpOGEHGOzOYcMtVBh5U5AndSAxs2XMQsseyFmCBayKXBQ816hIF3Pqep9KCDyvP8ae2+p7kH8wE0AVT0H4fOYCiH5YDxVY6TnRKiBZVxceI9jGSOsmQbFC0KL3MoJgGMi3t3J9X1tA/QD+6K4Ez0a7eTxNCizODicNtl68xi239k2qSoCsHhxQpl139NBE=
+-----------------------------------------------------------------------
+#ssourl.txt
+https://signin.aws.amazon.com/federation?Action=login&SigninToken=y4vQbyZt3z-iIcUNlGog0VrhyNzXY860E2DnOMhLplHqIl2OZPWIyPxww4JVNOdk2NTbqMcxi8sdQtNy1-ulTngVelwEffUGy1D2ctRmOBftqLK9qM8Kq2Ipf2gp8wk-IBjg7bKQunlzCzQoq7yu4ZoSekJZHENmFAZzzTCiwIMl4kcgANuAIK1YqSWZjAK6fPTjC4S-tuwo2sW5UbKz62tGqki_7vua1jKgDHZ4-FAPH2nv848Kn30uABfYTIIPjrfM-XgA75q1h-jmFNJilJBNmMNYUUn5ebquhrySR6jfDDjqRmAmBOttduEVhzeuHAaCswRbbNOWtbj_12I23HXQ8hP4pXy1YV4oWoHo6yCXVpgNAEAsIJsy199iuT7_WIgmDx426XmimW5H-E1E3_ypuQA_wrEfeYy9MgkUlrbQlC8oncipH6b3CtzG0Yyi2ekAca0qvIkRWKUMSvkRUenYI_eTBUTwS76dfHZQgQZYjC38blPQ7wPJi58ybnI3Lzp8BQn2fCVWxMwmV4bnbtkQXtB4heZKZRlr5FqVqsYa8JEoNx-M3DnZ1ZBZijo8x3A_jAGVb43ZVhr-vD3Rg8nJyV2fbeRIi_BxH87h06UFp1DeuG0WqYg1emWSscdiGzRQwjigYjr8vqtU5-X_odKfm1c1et0B27sjwmVKTzqlrKLbu6W87MuZV3h-3ZcbpBnZXxFMVB2RfL8AZRbnYInOWoBdpHP-bUSWbDZ2JiiPW7EZGqpvOnODwS2mKpP4yEoz8yvyH7EKQDQ5uh8SfPfMfUPw_MqD2a3mCg5JLuA0W2GC4KRcc58SipfY-0P6Gv9lhANy7zOtHKABUBusIATI2uIpDxvqZVHAtX9Chx5ehT1GIEtD4tAhMxNdbV0FPdS2g55kxiQKnl1dE2IRjmW-8aahUKs-Bkqg8zjELFEi6TBpJz8W7TIxIybJ8m9yV3baPIDtkpFUkhOabS1W61TZISkgG4mMT44msQQSnNP7fVlsDaDhfIKJ8WwLZnADP4UwN8d06ijFrPUO4ePAqk3GGo9rDYHB3Ds6JxhXzSDIspcTSfEhXcd_3kumXNyubbmzZLFPJ-YNkYr7WAbpIq0z9Fvn5llkiAsqpFC4ESCURUYbPoYNvGBVM2aEUJF1bohbySEd4vFIT986nt9VmhbdhSSmDCtVibloRnoPfKvqQjdNKPNxlNMnMx946zvtteQM6oWFrrDjNXQT2Ia5n54VZFOh4NVBp6IADyj6N9jVa3j2pDhHGo3LBjbWZc4Vj9sCX4YfVRiWV3pdrkDzMfa0RZhtb3qWwHE4V6GNpFtytjAgPVEJiWnkDMCuJH1-NndyHrqbBnfxyLvuTWoX4sll6VZ3kd8Ah9nqgtiDjXXeH4uh7VYCOGCV_Rw3DLjpjQNy6dIsQthfSnwlr0h_dREfo39lDV581u9-K50cwRuZXENUt60uGgWhG9-X&Issuer=https%3A%2F%2Flabs.vocareum.com&Destination=https%3A%2F%2Fconsole.aws.amazon.com%2Fconsole%2Fhome%3Fregion%3Dus-east-1
+------------------------------------------------------------------------
+COMMANDS:
+python3 --version
+
+sudo yum install -y unzip
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+[ec2-user@ip-10-200-0-104 ~]$ aws list-policies
+
+usage: aws [options] <command> <subcommand> [<subcommand> ...] [parameters]
+To see help text, you can run:
+
+  aws help
+  aws <command> help
+  aws <command> <subcommand> help
+
+aws: error: argument command: Invalid choice, valid choices are:
+
+accessanalyzer                           | account                              
+acm                                      | acm-pca                              
+alexaforbusiness                         | amp                                  
+amplify                                  | amplifybackend                       
+amplifyuibuilder                         | apigateway                           
+apigatewaymanagementapi                  | apigatewayv2                         
+appconfig                                | appconfigdata                        
+appflow                                  | appintegrations                      
+application-autoscaling                  | application-insights                 
+applicationcostprofiler                  | appmesh                              
+apprunner                                | appstream                            
+appsync                                  | athena                               
+auditmanager                             | autoscaling                          
+autoscaling-plans                        | backup                               
+backup-gateway                           | backupstorage                        
+batch                                    | billingconductor                     
+braket                                   | budgets                              
+ce                                       | chime                                
+chime-sdk-identity                       | chime-sdk-media-pipelines            
+chime-sdk-meetings                       | chime-sdk-messaging                  
+cloud9                                   | cloudcontrol                         
+clouddirectory                           | cloudformation                       
+cloudfront                               | cloudhsm                             
+cloudhsmv2                               | cloudsearch                          
+cloudsearchdomain                        | cloudtrail                           
+cloudwatch                               | codeartifact                         
+codebuild                                | codecommit                           
+codeguru-reviewer                        | codeguruprofiler                     
+codepipeline                             | codestar                             
+codestar-connections                     | codestar-notifications               
+cognito-identity                         | cognito-idp                          
+cognito-sync                             | comprehend                           
+comprehendmedical                        | compute-optimizer                    
+connect                                  | connect-contact-lens                 
+connectcampaigns                         | connectparticipant                   
+cur                                      | customer-profiles                    
+databrew                                 | dataexchange                         
+datapipeline                             | datasync                             
+dax                                      | detective                            
+devicefarm                               | devops-guru                          
+directconnect                            | discovery                            
+dlm                                      | dms                                  
+docdb                                    | drs                                  
+ds                                       | dynamodb                             
+dynamodbstreams                          | ebs                                  
+ec2                                      | ec2-instance-connect                 
+ecr                                      | ecr-public                           
+ecs                                      | efs                                  
+eks                                      | elastic-inference                    
+elasticache                              | elasticbeanstalk                     
+elastictranscoder                        | elb                                  
+elbv2                                    | emr                                  
+emr-containers                           | emr-serverless                       
+es                                       | events                               
+evidently                                | finspace                             
+finspace-data                            | firehose                             
+fis                                      | fms                                  
+forecast                                 | forecastquery                        
+frauddetector                            | fsx                                  
+gamelift                                 | gamesparks                           
+glacier                                  | globalaccelerator                    
+glue                                     | grafana                              
+greengrass                               | greengrassv2                         
+groundstation                            | guardduty                            
+health                                   | healthlake                           
+honeycode                                | iam                                  
+identitystore                            | imagebuilder                         
+importexport                             | inspector                            
+inspector2                               | iot                                  
+iot-data                                 | iot-jobs-data                        
+iot1click-devices                        | iot1click-projects                   
+iotanalytics                             | iotdeviceadvisor                     
+iotevents                                | iotevents-data                       
+iotfleethub                              | iotsecuretunneling                   
+iotsitewise                              | iotthingsgraph                       
+iottwinmaker                             | iotwireless                          
+ivs                                      | ivschat                              
+kafka                                    | kafkaconnect                         
+kendra                                   | keyspaces                            
+kinesis                                  | kinesis-video-archived-media         
+kinesis-video-media                      | kinesis-video-signaling              
+kinesisanalytics                         | kinesisanalyticsv2                   
+kinesisvideo                             | kms                                  
+lakeformation                            | lambda                               
+lex-models                               | lex-runtime                          
+lexv2-models                             | lexv2-runtime                        
+license-manager                          | license-manager-user-subscriptions   
+lightsail                                | location                             
+logs                                     | lookoutequipment                     
+lookoutmetrics                           | lookoutvision                        
+m2                                       | machinelearning                      
+macie                                    | macie2                               
+managedblockchain                        | marketplace-catalog                  
+marketplace-entitlement                  | marketplacecommerceanalytics         
+mediaconnect                             | mediaconvert                         
+medialive                                | mediapackage                         
+mediapackage-vod                         | mediastore                           
+mediastore-data                          | mediatailor                          
+memorydb                                 | meteringmarketplace                  
+mgh                                      | mgn                                  
+migration-hub-refactor-spaces            | migrationhub-config                  
+migrationhubstrategy                     | mobile                               
+mq                                       | mturk                                
+mwaa                                     | neptune                              
+network-firewall                         | networkmanager                       
+nimble                                   | opensearch                           
+opsworks                                 | opsworkscm                           
+organizations                            | outposts                             
+panorama                                 | personalize                          
+personalize-events                       | personalize-runtime                  
+pi                                       | pinpoint                             
+pinpoint-email                           | pinpoint-sms-voice                   
+pinpoint-sms-voice-v2                    | polly                                
+pricing                                  | privatenetworks                      
+proton                                   | qldb                                 
+qldb-session                             | quicksight                           
+ram                                      | rbin                                 
+rds                                      | rds-data                             
+redshift                                 | redshift-data                        
+redshift-serverless                      | rekognition                          
+resiliencehub                            | resource-groups                      
+resourcegroupstaggingapi                 | robomaker                            
+rolesanywhere                            | route53                              
+route53-recovery-cluster                 | route53-recovery-control-config      
+route53-recovery-readiness               | route53domains                       
+route53resolver                          | rum                                  
+s3control                                | s3outposts                           
+sagemaker                                | sagemaker-a2i-runtime                
+sagemaker-edge                           | sagemaker-featurestore-runtime       
+sagemaker-runtime                        | savingsplans                         
+schemas                                  | sdb                                  
+secretsmanager                           | securityhub                          
+serverlessrepo                           | service-quotas                       
+servicecatalog                           | servicecatalog-appregistry           
+servicediscovery                         | ses                                  
+sesv2                                    | shield                               
+signer                                   | sms                                  
+snow-device-management                   | snowball                             
+sns                                      | sqs                                  
+ssm                                      | ssm-contacts                         
+ssm-incidents                            | sso                                  
+sso-admin                                | sso-oidc                             
+stepfunctions                            | storagegateway                       
+sts                                      | support                              
+support-app                              | swf                                  
+synthetics                               | textract                             
+timestream-query                         | timestream-write                     
+transcribe                               | transfer                             
+translate                                | voice-id                             
+waf                                      | waf-regional                         
+wafv2                                    | wellarchitected                      
+wisdom                                   | workdocs                             
+worklink                                 | workmail                             
+workmailmessageflow                      | workspaces                           
+workspaces-web                           | xray                                 
+s3api                                    | s3                                   
+ddb                                      | configure                            
+deploy                                   | configservice                        
+opsworks-cm                              | history                              
+cli-dev                                  | help                                 
+
+[ec2-user@ip-10-200-0-104 ~]$
+
+-----------------------------------------------------------------------
+JSON:
+lab_poicy-------------
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "iam:get*",
+                "iam:list*"
+            ],
+            "Resource": "*",
+            "Effect": "Allow"
+        }
+    ]
+}
+
+[ec2-user@ip-10-200-0-104 ~]$ {
+>     "Users": [
+>         {
+>             "Path": "/",
+>             "UserName": "awsstudent",
+>             "UserId": "AIDARVZHSO2CKHRKNDUIU",
+>             "Arn": "arn:aws:iam::115510244996:user/awsstudent",
+>             "CreateDate": "2022-08-26T01:47:45+00:00"
+>         }
+>     ]
+> }
+robomaker_students--------------
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": "iam:CreateServiceLinkedRole",
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "iam:AWSServiceName": "robomaker.amazonaws.com"
+                }
+            }
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:*",
+                "cloudformation:*",
+                "ec2:AssociateRouteTable",
+                "ec2:AttachInternetGateway",
+                "ec2:CreateInternetGateway",
+                "ec2:CreateNetworkInterfacePermission",
+                "ec2:CreateRoute",
+                "ec2:CreateRouteTable",
+                "ec2:CreateSecurityGroup",
+                "ec2:CreateSubnet",
+                "ec2:CreateTags",
+                "ec2:CreateVpc",
+                "ec2:DeleteNetworkInterface",
+                "ec2:DeleteSubnet",
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeVpcs",
+                "kinesis:*",
+                "kinesisvideo:*",
+                "lex:*",
+                "logs:*",
+                "polly:*",
+                "robomaker:*",
+                "rekognition:*",
+                "s3:*",
+                "sns:*",
+                "iam:passrole"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+-------------------------------------------------------------------------

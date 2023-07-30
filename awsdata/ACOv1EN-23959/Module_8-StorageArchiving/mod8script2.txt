@@ -1,0 +1,120 @@
+SecretKey	Ig6CyUYrS4K5T9i9LVHvtJCFpdUcBMZcdErZUH7/
+CliHostPublicIP	44.195.90.213
+AccessKey	AKIA4OPCUPM7WH54XQPS
+
+dqOOw5GJ4uATKcAD53p4/8p8AGwZ+QXT3MDq6xPL
+AKIA4OPCUPM74YCX4A2X 
+============================================================================
+26.curl http://169.254.169.254/latest/dynamic/instance-identity/document | grep region
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   476  100   476    0     0  81786      0 --:--:-- --:--:-- --:--:-- 95200
+  "region" : "us-east-1",
+
+
+27.aws configure
+
+29.aws s3 mb s3://<mompopcafe-xxxnnn> --region <region>
+
+30.aws s3 sync ~/initial-images/ s3://<mompopcafe-xxxnnn>/images
+
+31.aws s3 ls s3://<mompopcafe-xxxnnn>/images/ --human-readable --summarize
+
+=============================================================================
+
+85.{
+
+  "Version": "2008-10-17",
+
+  "Id": "S3PublishPolicy",
+
+  "Statement": [
+
+    {
+
+      "Sid": "AllowPublishFromS3",
+
+      "Effect": "Allow",
+
+      "Principal": {
+
+        "Service": "s3.amazonaws.com"
+
+      },
+
+      "Action": "SNS:Publish",
+
+      "Resource": "<ARN of s3NotificationTopic>",
+
+      "Condition": {
+
+        "ArnLike": {
+
+          "aws:SourceArn": "arn:aws:s3:*:*:<mompopcafe-xxxnnn>"
+
+        }
+
+      }
+
+    }
+
+  ]
+
+}
+
+96.vi s3EventNotification.json
+
+97.i
+
+98.{
+
+  "TopicConfigurations": [
+
+    {
+
+      "TopicArn": "<ARN of s3NotificationTopic>",
+
+      "Events": ["s3:ObjectCreated:*","s3:ObjectRemoved:*"],
+
+      "Filter": {
+
+        "Key": {
+
+          "FilterRules": [
+
+            {
+
+              "Name": "prefix",
+
+              "Value": "images/"
+
+            }
+
+          ]
+
+        }
+
+      }
+
+    }
+
+  ]
+
+}
+
+102.aws s3api put-bucket-notification-configuration --bucket <mompopcafe-xxxnnn> --notification-configuration file://s3EventNotification.json
+
+104.{"Service":"Amazon S3","Event":"s3:TestEvent","Time":"2019-04-26T06:04:27.405Z","Bucket":"<mompopcafe-xxxnnn>","RequestId":"7A87C25E0323B2F4","HostId":"fB3Z...SD////PWubF3E7RYtVupg="}
+
+105.aws configure
+
+107aws s3api put-object --bucket <mompopcafe-xxxnnn> --key images/Caramel-Delight.jpg --body ~/new-images/Caramel-Delight.jpg
+
+110.aws s3api get-object --bucket <mompopcafe-xxxnnn> --key images/Donuts.jpg Donuts.jpg
+
+111.aws s3api delete-object --bucket <mompopcafe-xxxnnn> --key images/Strawberry-Tarts.jpg
+
+114.aws s3api put-object-acl --bucket <mompopcafe-xxxnnn> --key images/Donuts.jpg --acl public-read
+
+
+

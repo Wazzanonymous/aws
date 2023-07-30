@@ -1,0 +1,249 @@
+Athena Schema
+
+CREATE EXTERNAL TABLE cloudtrail_logs_monitoring1369 (
+    eventVersion STRING,
+    userIdentity STRUCT<
+        type: STRING,
+        principalId: STRING,
+        arn: STRING,
+        accountId: STRING,
+        invokedBy: STRING,
+        accessKeyId: STRING,
+        userName: STRING,
+        sessionContext: STRUCT<
+            attributes: STRUCT<
+                mfaAuthenticated: STRING,
+                creationDate: STRING>,
+            sessionIssuer: STRUCT<
+                type: STRING,
+                principalId: STRING,
+                arn: STRING,
+                accountId: STRING,
+                userName: STRING>>>,
+    eventTime STRING,
+    eventSource STRING,
+    eventName STRING,
+    awsRegion STRING,
+    sourceIpAddress STRING,
+    userAgent STRING,
+    errorCode STRING,
+    errorMessage STRING,
+    requestParameters STRING,
+    responseElements STRING,
+    additionalEventData STRING,
+    requestId STRING,
+    eventId STRING,
+    resources ARRAY<STRUCT<
+        arn: STRING,
+        accountId: STRING,
+        type: STRING>>,
+    eventType STRING,
+    apiVersion STRING,
+    readOnly STRING,
+    recipientAccountId STRING,
+    serviceEventDetails STRING,
+    sharedEventID STRING,
+    vpcEndpointId STRING
+)
+COMMENT 'CloudTrail table for monitoring1369 bucket'
+ROW FORMAT SERDE 'com.amazon.emr.hive.serde.CloudTrailSerde'
+STORED AS INPUTFORMAT 'com.amazon.emr.cloudtrail.CloudTrailInputFormat'
+OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION 's3://monitoring1369/AWSLogs/543760444814/CloudTrail/'
+TBLPROPERTIES ('classification'='cloudtrail');
+-------------------------------------------------------------------------
+ATHENA SQL
+
+SELECT *
+
+FROM cloudtrail_logs_monitoring####
+
+LIMIT 5
+
+SELECT useridentity.userName, eventtime, eventsource, eventname, requestparameters
+
+FROM cloudtrail_logs_monitoring####
+
+LIMIT 30
+
+SELECT DISTINCT useridentity.userName, eventName, eventSource FROM cloudtrail_logs_monitoring#### WHERE from_iso8601_timestamp(eventtime) > date_add('day', -1, now()) ORDER BY eventSource;
+--------------------------------------------------------------------------
+Task 5: Further Analysis of the Hack and Improving Security
+
+In this last task, you will work to secure both your AWS account, and the web server instance.
+
+ 
+Task 5.1: Check the OS users
+
+    In the terminal where you have an active SSH session to the web server instance, run the following command to find out who has recently logged into this OS:
+
+    sudo aureport --auth
+
+    That is interesting! There is evidence that a user other than ec2-user has logged in. Who is that chaos-user?
+
+     
+
+    Run the who command to figure out who is currently logged in:
+
+    who
+
+    Whoa! The user is still logged in! Let's get them off this instance right away.
+
+     
+	 aws iam delete-login-profile --user-name=chaos
+
+    Try removing the chaos-user OS user:
+
+    sudo userdel -r chaos-user
+
+    That didn't work, because they are still logged in. However, it did return the process number they are connected as.
+
+     
+
+    Stop the process that has the active chaos-user login session (replace ProcNum with the process number returned by the last command):
+
+    sudo kill -9 ProcNum
+
+     
+
+    Run the who command again to verify they are no longer connected:
+
+    who
+
+    Now you (the ec2-user) should be the only user connected.
+
+     
+
+    Try again to delete the chaos-user OS user:
+
+    sudo userdel -r chaos-user
+
+    It should succeed this time.
+
+     
+
+    Verify no other suspicious OS users who can login:
+
+    sudo cat /etc/passwd | grep -v nologin
+
+    Note that the grep part of the command you just ran filtered out the OS users who do not have a login.
+
+    The root, sync, shutdown, and halt users are all standard OS users in Amazon Linux, so there are no other concerning user logins on this instance.
+
+     
+
+Task 5.2: Update SSH security
+
+ 
+
+    Analyze SSH settings on the instance.
+
+    You have removed the OS user who hacked in, but how did they manage to SSH into this instance in the first place?
+
+    You have been careful about who has access to the key pair file. However, maybe you should check the SSH settings on this instance.
+
+    sudo ls -l /etc/ssh/sshd_config
+
+    Notice the last modified timestamp for the file. This file was modified today! That is concerning.
+
+     
+
+    Edit the SSH configuration file in the VI editor:
+
+    sudo vi /etc/ssh/sshd_config
+
+        Analyze the details of this file. Type :set number to see the line numbers in this file.
+        Notice on line 61 that password authentication is enabled. That is definitely not a security best practice!
+        That means that anyone who knows (or can correctly guess) the username and password combination of an OS user can remotely access this instance, without using an SSH key pair. This setting needs to be corrected.
+        Move your cursor (using the arrow up or down keys) to the "PasswordAuthentication yes" line and comment it out.
+
+    Tip: Type a on your keyboard to enter edit mode in VI, add a # character at the start of the line.
+
+        Next, move your cursor to "#PasswordAuthentication no" line (line 63) by using the arrow keys and uncomment this line (remove the # character).
+
+        Choose the Esc key on your keyboard to exit edit mode.
+
+        Save the changes and exit the VI editor using this command: :wq
+
+         
+
+    Restart the SSH service so that the changes go into effect:
+
+    sudo service sshd restart
+
+    Note: If running the command above interrupts your SSH connection, reestablish the SSH connection before continuing on to the next step.
+
+     
+
+    Finally, in the EC2 console, return to the Web Server Security Group settings.
+
+    With the WebSecurityGroup selected, go to the Inbound rules tab choose Edit inbound rules.
+
+    Delete the inbound rule that allows port 22 access from 0.0.0.0/0 (the one the hacker created)
+
+     
+
+    Choose Save rules to save the change.
+
+     
+
+Nice work! You have kicked the hacker out of this instance and remove the login account that they used. You also updated the SSH settings so that only users who have the correct key pair and the same source IP address as you can connect to it.
+
+ 
+Task 5.3: Fix the website
+
+Now that the hacker no longer has access to this instance, you can fix the issue with the website.
+
+ 
+
+    Back in the terminal window where you are connect to the Cafe Web Server instance, navigate to the directory where the website image files are held and review the contents:
+
+    cd /var/www/html/mompopcafe/images/
+
+    ls -l
+
+    It looks like the hacker created a backup of the original file.
+
+     
+
+    Restore the original graphic on the website.
+
+    sudo mv Coffee-and-Pastries.backup Coffee-and-Pastries.png
+
+     
+
+    Test the fix, by reloading the http://<WebServerIP>/mompopcafe website in the browser.
+
+    Tip: You may need to hold the Shift key down and choose the browser refresh button to see the change.
+
+    That looks better!
+
+     
+
+Task 5.4: Delete the AWS hacker user
+
+Recall that the hacker not only accessed the EC2 instance hosting the website, but they also managed to run an AWS CLI command that opened port 22 in the security group to the entire internet. In this step you will remove the chaos IAM user from the account.
+
+ 
+
+    In the AWS Management Console, in the search box next to  Services search for and select the IAM service to open the IAM console.
+
+     
+
+    Choose the Users link and check the box next to the chaos user.
+
+     
+
+    Delete the chaos user.
+
+        Choose Delete, type in the user name chaos  and choose Delete.
+
+        An error appears indicating that you must first delete the user's login profile.
+
+        Return to the terminal window and run the command below to delete the login profile.
+
+        aws iam delete-login-profile --user-name=chaos
+
+        Return to the IAM console and try deleting the user again. This time the action should succeed.
+
+        Nice work! That chaos user shouldn't be causing any trouble in the AWS account anymore.

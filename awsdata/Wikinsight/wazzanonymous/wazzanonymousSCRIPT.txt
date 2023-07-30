@@ -1,0 +1,11 @@
+AWS Account Owner ID: 149468783597 
+
+wazzanonymous access key and secret key:
+AKIASFTIIUPWVOX4ML74
+
+subnet-0de3b0a7b9b588591 | port-4091 | Network border Group-us-east-1
+arn:aws:ec2:us-east-1:149468783597:subnet/subnet-0de3b0a7b9b588591 | VPC
+vpc-0934a1c34a9b07800 | Default VPC
+us-east-1f | Route table: rtb-020d2affb6109b0bc
+172.31.64.0/20 | use1-az5 
+Target: igw-04028921442b476e7

@@ -1,0 +1,439 @@
+(function() {
+  var out$ = typeof exports != 'undefined' && exports || typeof define != 'undefined' && {} || this;
+
+  var doctype = '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
+
+  // Check whether its an ie or safari user agent
+  var ie = navigator.userAgent.match(/MSIE\s([\d.]+)/);
+  var ie11 = navigator.userAgent.match(/Trident\/7.0/) && navigator.userAgent.match(/rv:11/);
+  var safari = navigator.userAgent.match("Safari") && !navigator.userAgent.match("Chrome");
+  var edge = navigator.userAgent.match("Edge");
+
+  var export_png_success = "export_png_success";
+  var export_png_no_diagram = "export_png_no_diagram";
+  var account_id_cookie_key = "aws-account-alias";
+
+
+  function localize(messageId) {
+      if(!messageId && !_.has(window.localized, messageId)) {
+          return '';
+      }
+      return window.localized[messageId];
+  }
+
+  function getCookie (name) {
+      var re = new RegExp(name + "=([^;]+)");
+      var value = re.exec(document.cookie);
+      return (value != null) ? window.unescape(value[1]) : null;
+  }
+
+  function removeStylesAndMaskForExport(clone) {
+      // Remove highlighted class. Cannot use jQuery's removeClass for SVG
+      var classString = $(clone).find('.highlighted').attr('class');
+      if(!_.isUndefined(classString))
+      {
+          classString = classString.replace("highlighted","");
+          $(clone).find('.highlighted').attr('class', classString);
+      }
+
+      // Remove the grey rectangle that comes with the "Designer is out of date, hit refresh" message
+      $(clone).find("#viewportMask").remove();
+  }
+
+  function svgAsDataUriForIEAndSafari(svg, cb, backgroundColor) {
+      var canvas = document.createElement('canvas');
+      var ctx = canvas.getContext('2d');
+
+      try {
+          canvg(canvas,svg);
+      } catch (e) {
+        window.AWSC.Clog.log(export_png_success, 0, getCookie(account_id_cookie_key));
+        window.clientReporting.error('ExportPngError', {message: e.message, useragent: navigator.userAgent});
+        $.Topic(Constants.Topics.Composer.Ready).publish(localize('error_generating_image'));
+      }
+
+      // set to draw behind current content
+      ctx.globalCompositeOperation = "destination-over";
+      ctx.fillStyle = backgroundColor;
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      try {
+          png = canvas.toDataURL("image/png");
+      } catch (e) {
+        window.AWSC.Clog.log(export_png_success, 0, getCookie(account_id_cookie_key));
+        window.clientReporting.error('ExportPngError', {message: e.message, useragent: navigator.userAgent});
+        $.Topic(Constants.Topics.Composer.Ready).publish(localize('error_generating_image'));
+      }
+
+      cb(png, canvas);
+  }
+
+  function makeCorsRequestForSafari(el, name, options, w1) {
+      var milliSeconds = new Date().getTime();
+      // Append query parameter to force safari to not load it from cache and avoid XMLHttpRequest cannot load error
+      var urls = [$("#jointCSS").attr("href") + "?t="+milliSeconds, $("#composerCSS").attr("href") + "?t="+milliSeconds];
+      $.when($.get(urls[0]), $.get(urls[1])).done(function(data1, data2) {
+          var styleNode1 = document.createElement('style');
+          var styleNode2 = document.createElement('style');
+          styleNode1.textContent = data1;
+          document.head.appendChild(styleNode1);
+          styleNode2.textContent = data2;
+          document.head.appendChild(styleNode2);
+          // Moving ahead with normal execution now that cssRules will be available in document.styleSheets.
+          out$.svgAsPngUri(el, options, function(uri,canvas) {
+              download(name, uri,canvas,w1);
+          });
+      });
+  }
+
+  function isCanvasPaneEmpty(el) {
+     var bbox = el.getBBox();
+
+     if(bbox.x === 0 && bbox.y === 0 && bbox.width === 0 && bbox.height === 0)
+     {
+         return true;
+     }
+
+     return false;
+  }
+
+  function isElement(obj) {
+    return obj instanceof HTMLElement || obj instanceof SVGElement;
+  }
+
+  function requireDomNode(el) {
+    if (!isElement(el)) {
+      throw new Error('an HTMLElement or SVGElement is required; got ' + el);
+    }
+  }
+
+  function isExternal(url) {
+    return url && url.lastIndexOf('http',0) == 0 && url.lastIndexOf(window.location.host) == -1;
+  }
+
+  function inlineImages(el, callback) {
+	if (ie || ie11 || safari)
+	{
+            // canvg will handle images. No need to do it here if we are using canvg for ie and safari.
+	    callback();
+	    return;
+	}
+
+    requireDomNode(el);
+
+    var images = el.querySelectorAll('image'),
+        left = images.length,
+        checkDone = function() {
+          if (left === 0) {
+            callback();
+          }
+        };
+
+    checkDone();
+    for (var i = 0; i < images.length; i++) {
+      (function(image) {
+        var href = image.getAttributeNS("http://www.w3.org/1999/xlink", "href");
+        if (href) {
+          if (isExternal(href.value)) {
+            console.warn("Cannot render embedded images linking to external hosts: "+href.value);
+            return;
+          }
+        }
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext('2d');
+        var img = new Image();
+        // Chrome didn't need crossOrigin attribute to be set but firefox did.
+        img.setAttribute('crossorigin', 'anonymous');
+        href = href || image.getAttribute('href');
+        if (href) {
+          img.src = href;
+          img.onload = function() {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            try {
+                image.setAttributeNS("http://www.w3.org/1999/xlink", "href", canvas.toDataURL('image/png'));
+            } catch (e) {
+              window.AWSC.Clog.log(export_png_success, 0, getCookie(account_id_cookie_key));
+              window.clientReporting.error('ExportPngError', {message: e.message, useragent: navigator.userAgent});
+              $.Topic(Constants.Topics.Composer.Ready).publish(localize('error_generating_image'));
+            }
+            left--;
+            checkDone();
+          }
+          img.onerror = function() {
+            console.log("Could not load "+href);
+            left--;
+            checkDone();
+          }
+        } else {
+          left--;
+          checkDone();
+        }
+      })(images[i]);
+    }
+  }
+
+  function styles(el, selectorRemap) {
+    var css = "";
+    var sheets = document.styleSheets;
+    for (var i = 0; i < sheets.length; i++) {
+      try {
+        var rules = sheets[i].cssRules;
+      } catch (e) {
+        console.warn("Stylesheet could not be loaded: "+sheets[i].href);
+        continue;
+      }
+
+      if (rules != null) {
+        for (var j = 0; j < rules.length; j++) {
+          var rule = rules[j];
+          if (typeof(rule.style) != "undefined") {
+            var match, selectorText;
+
+            try {
+              selectorText = rule.selectorText;
+            } catch(err) {
+              console.warn('The following CSS rule has an invalid selector: "' + rule + '"', err);
+            }
+
+            try {
+              if (selectorText) {
+                match = el.querySelector(selectorText);
+              }
+            } catch(err) {
+              console.warn('Invalid CSS selector "' + selectorText + '"', err);
+            }
+
+            if (match) {
+              var selector = selectorRemap ? selectorRemap(rule.selectorText) : rule.selectorText;
+              css += selector + " { " + rule.style.cssText + " }\n";
+            }
+          }
+        }
+      }
+    }
+    return css;
+  }
+
+  function getDimension(el, clone, dim) {
+    var v = (el.viewBox && el.viewBox.baseVal && el.viewBox.baseVal[dim]) ||
+      (clone.getAttribute(dim) !== null && !clone.getAttribute(dim).match(/%$/) && parseInt(clone.getAttribute(dim))) ||
+      el.getBoundingClientRect()[dim] ||
+      parseInt(clone.style[dim]) ||
+      parseInt(window.getComputedStyle(el).getPropertyValue(dim));
+    return (typeof v === 'undefined' || v === null || isNaN(parseFloat(v))) ? 0 : v;
+  }
+
+  function reEncode(data) {
+    data = encodeURIComponent(data);
+    data = data.replace(/%([0-9A-F]{2})/g, function(match, p1) {
+      var c = String.fromCharCode('0x'+p1);
+      return c === '%' ? '%25' : c;
+    });
+    return decodeURIComponent(data);
+  }
+
+  out$.svgAsDataUri = function(el, options, cb) {
+    requireDomNode(el);
+
+    options = options || {};
+    options.scale = options.scale || 1;
+    options.responsive = options.responsive || false;
+    var xmlns = "http://www.w3.org/2000/xmlns/";
+
+    inlineImages(el, function() {
+      var clone = el.cloneNode(true);
+      removeStylesAndMaskForExport(clone);
+      var width, height, x, y;
+
+      // shift and scale the clone so that it is the same size as when the diagram is fitted to window.
+      var target = d3.select(clone);
+      target.select("g").attr("transform", "translate(" + options.zoomCenter[0] + "," + options.zoomCenter[1] + ") scale(" + options.centerScale+ ")");
+
+      // Replace contents of exportImageDiv with clone
+      $("#exportImageDiv").html(clone);
+
+      if(clone.tagName == 'svg') {
+        var bbox = clone.getBBox();
+
+        // -10 and +20 are done to add a bit of whitespace margins
+        x = bbox.x - 10;
+        y = bbox.y - 10;
+        width = bbox.width + 20;
+        height = bbox.height + 20;
+      }  else {
+        console.error('Attempted to render non-SVG element', el);
+        return;
+      }
+
+      clone.setAttribute("version", "1.1");
+      if (!clone.getAttribute('xmlns')) {
+        clone.setAttributeNS(xmlns, "xmlns", "http://www.w3.org/2000/svg");
+      }
+      if (!clone.getAttribute('xmlns:xlink')) {
+        clone.setAttributeNS(xmlns, "xmlns:xlink", "http://www.w3.org/1999/xlink");
+      }
+
+      if (options.responsive) {
+        clone.removeAttribute('width');
+        clone.removeAttribute('height');
+        clone.setAttribute('preserveAspectRatio', 'xMinYMin meet');
+      } else {
+        // Scale the centered clone
+        clone.setAttribute("width", width * options.scale);
+        clone.setAttribute("height", height * options.scale);
+      }
+
+      clone.setAttribute("viewBox", [
+        x,
+        y,
+        width,
+        height
+      ].join(" "));
+
+      var fos = clone.querySelectorAll('foreignObject > *');
+      for (var i = 0; i < fos.length; i++) {
+        if (!fos[i].getAttributeNS('xml', 'xmlns')) {
+          fos[i].setAttributeNS(xmlns, "xmlns", "http://www.w3.org/1999/xhtml");
+        }
+      }
+
+      var css = styles(el, options.selectorRemap);
+      var s = document.createElement('style');
+      s.setAttribute('type', 'text/css');
+      s.innerHTML = "<![CDATA[\n" + css + "\n]]>";
+      var defs = document.createElement('defs');
+      defs.appendChild(s);
+      clone.insertBefore(defs, clone.firstChild);
+
+      var svg = doctype + $("#exportImageDiv").html();
+      // This is done because Safari adds NS namespace on setAttributeNS. This gives an error while putting svg into the canvas.
+      svg = svg.replace(/NS\d+:href/g, 'xlink:href');
+      var uri = 'data:image/svg+xml;base64,' + window.btoa(reEncode(svg));
+
+       if (cb) {
+        cb(uri,svg);
+      }
+    });
+  }
+
+  out$.svgAsPngUri = function(el, options, cb) {
+    requireDomNode(el);
+
+    out$.svgAsDataUri(el, options, function(uri,svg) {
+      if(ie || ie11 || safari)
+      {
+          /* IE gives a security error when you put svg into a canvas and then do a toDataURL('image/png') on the canvas.
+             Using canvg plugin for ie because it handles the issue. Using canvg for Safari because of CORS issue. */
+          svgAsDataUriForIEAndSafari(svg, cb, options.backgroundColor);
+          return;
+      }
+
+      var image = new Image();
+      image.onload = function() {
+        var canvas = document.createElement('canvas');
+        canvas.width = image.width;
+        canvas.height = image.height;
+        var context = canvas.getContext('2d');
+        if(options && options.backgroundColor){
+          context.fillStyle = options.backgroundColor;
+          context.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        context.drawImage(image, 0, 0);
+        var a = document.createElement('a'), png;
+        try {
+          png = canvas.toDataURL('image/png');
+        } catch (e) {
+          window.AWSC.Clog.log(export_png_success, 0, getCookie(account_id_cookie_key));
+          window.clientReporting.error('ExportPngError', {message: e.message, useragent: navigator.userAgent});
+          $.Topic(Constants.Topics.Composer.Ready).publish(localize('error_generating_image'));
+          if ((typeof SecurityError !== 'undefined' && e instanceof SecurityError) || e.name == "SecurityError") {
+            console.error("Rendered SVG images cannot be downloaded in this browser.");
+            return;
+          } else {
+            throw e;
+          }
+        }
+        cb(png,canvas);
+      }
+      image.onerror = function() {
+        console.error(
+          'There was an error loading the data URI as an image on the following SVG\n',
+          window.atob(uri.slice(26)), '\n',
+          "Open the following link to see browser's diagnosis\n",
+          uri);
+        window.AWSC.Clog.log(export_png_success, 0, getCookie(account_id_cookie_key));
+        window.clientReporting.error('ExportPngError', {message: 'There was an error loading the data URI as an image', useragent: navigator.userAgent});
+        $.Topic(Constants.Topics.Composer.Ready).publish(localize('error_generating_image'));
+      }
+      image.src = uri;
+    });
+  }
+
+  function download(name, uri, canvas,w1) {
+    if (ie || ie11 || edge) {
+        var blob = canvas.msToBlob();
+        window.navigator.msSaveBlob(blob, name);
+    }
+    else if(safari)
+    {
+        w1.location.href = uri;
+    }
+    else
+    {
+        var a = document.createElement('a');
+        a.download = name;
+        a.href = uri;
+        document.body.appendChild(a);
+        a.addEventListener("click", function(e) {
+            a.parentNode.removeChild(a);
+        });
+        a.click();
+    }
+    $.Topic(Constants.Topics.Composer.Ready).publish('');
+    window.AWSC.Clog.log(export_png_success, 1, getCookie(account_id_cookie_key));
+   }
+
+  out$.saveSvg = function(el, name, options) {
+    requireDomNode(el);
+
+    options = options || {};
+    out$.svgAsDataUri(el, options, function(uri) {
+      download(name, uri);
+    });
+  }
+
+  out$.saveSvgAsPng = function(el, name, options) {
+    requireDomNode(el);
+    if(isCanvasPaneEmpty(el))
+    {
+        $.Topic(Constants.Topics.Composer.Ready).publish(localize('no_diagram_to_download_message'));
+        window.AWSC.Clog.log(export_png_no_diagram, 1, getCookie(account_id_cookie_key));
+        return;
+    }
+    window.AWSC.Clog.log(export_png_no_diagram, 0, getCookie(account_id_cookie_key));
+    options = options || {};
+
+    if(safari)
+    {
+        // Cannot open window in a callback function in safari. Have to do it here. Image uri will be put in later in the download function.
+        var w1 = window.open();
+        /* In Safari cross origin cssRules isn't available in document.styleSheets becuase crossorgin attribute in the link tag doesn't work in Safari.
+           Making an ajax request for the stylesheet and appending it to head so that the cssRules become available in document.styleSheets. */
+        makeCorsRequestForSafari(el, name, options, w1);
+    }
+    else
+    {
+       out$.svgAsPngUri(el, options, function(uri,canvas) {
+           download(name, uri,canvas);
+        });
+    }
+  }
+
+  // if define is defined create as an AMD module
+  if (typeof define !== 'undefined') {
+    define(function() {
+      return out$;
+    });
+  }
+})();

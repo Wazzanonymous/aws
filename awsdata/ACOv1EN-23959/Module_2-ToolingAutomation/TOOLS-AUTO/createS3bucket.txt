@@ -1,0 +1,20 @@
+MODULE_2 Create S3 Bucket
+AWS CLI Command Reference - https://docs.aws.amazon.com/cli/latest/reference/s3api/
+SecretKey	lbl5G2X+tC20dJ3sCwOIfh3auy1J0II9JcS5vWTC
+IAMUserPassword	igw-061c5d157ae97c84c
+PublicIP	54.205.232.201
+AccessKey	AKIAX65JBXVM3FDC5QYC
+IAMUserName	awsS3user
+---------------------------------------------------------------------------
+
+   AWS CLI:   
+   Copy and paste the following into ~/.aws/credentials
+[default]
+aws_access_key_id=ASIAX65JBXVM2SGP2MPH
+aws_secret_access_key=Zm/dpxx3xI+oDqt3EzH27UeqWeTcXLibYC/o9b49
+aws_session_token=FwoGZXIvYXdzEGcaDDb1oDzi1qhOhu+v6SK8AVFQq5zGjlfJ1UVu0FDPf2vpVsgKoP19qb1MVjOLvo6OFO+z8bNNtm/+8m2UbZ7W8F3TDNXDl3cbIIq3S4cjwlaVBqxSKNVWvsM7/QiAMsS5IiprJy3q7AlqyEVJT3gEC7nQX2Y1wDffMhIxJ9X7nmGD37wu/URxTWhl9ciDGi8QuQcmsZGvY+jG+DvtMAcCBV5XWeqO0LZ43LOYr6d8v1ayEBAZQq3Fx2jHw2uptzXI52nnSlvKxgJp+4cWKLS9oZgGMi2/UEr9Ydckkl1ZXLH5Yfg0Sl3Oe7YQVG+u2NbMV+03iRiCVWpKuaq9AncPVF8=
+---------------------------------------------------------------------------
+aws s3api create-bucket \
+    --bucket jsmith256 \
+    --region eu-west-2\
+	--create-bucket-configuration LocationConstraint=eu-west-2\
