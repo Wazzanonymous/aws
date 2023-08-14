@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
+	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
+	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
+	<!ENTITY ns_vars "http://ns.adobe.com/Variables/1.0/">
+	<!ENTITY ns_imrep "http://ns.adobe.com/ImageReplacement/1.0/">
+	<!ENTITY ns_sfw "http://ns.adobe.com/SaveForWeb/1.0/">
+	<!ENTITY ns_custom "http://ns.adobe.com/GenericCustomNamespace/1.0/">
+	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
+]>
+<svg version="1.1" id="Layer_3" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px" viewBox="-247 370.9 100 100"
+	 style="enable-background:new -247 370.9 100 100;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#F68634;}
+	.st1{fill:#9E5225;}
+	.st2{fill:#FFFFFF;}
+</style>
+	<g i:extraneous="self">
+		<g>
+			<polygon class="st0" points="-218.5,440.8 -223.1,441.4 -223,396.1 -219.1,396.5 			"/>
+			<polygon class="st0" points="-210.5,444.6 -215.1,445.3 -215,392.1 -210.7,392.9 			"/>
+			<polygon class="st0" points="-201.9,448.9 -206.3,449.8 -206.1,387.9 -201.9,388.8 			"/>
+			<polygon class="st0" points="-196.5,383.1 -167.1,397.6 -167.2,439.8 -196.7,454.3 			"/>
+			<polygon class="st1" points="-223,441.4 -226.3,439.7 -226.3,397.5 -223,396.1 			"/>
+			<polygon class="st1" points="-196.4,454.4 -202.3,451.7 -202.3,385.7 -196.5,383.1 			"/>
+			<polygon class="st1" points="-206.1,449.8 -211,447.3 -211,390.1 -206.1,387.8 			"/>
+			<polygon class="st1" points="-215,445.4 -219.6,443.1 -219.6,394.3 -215,392.1 			"/>
+		</g>
+		<g>
+			<circle class="st2" cx="-179.9" cy="437.2" r="21.6"/>
+			<polygon class="st0" points="-179.3,427 -171.9,422.8 -164.6,427 -164.6,435.5 -171.9,439.8 -179.3,435.5 			"/>
+			<polygon class="st2" points="-178.1,427.5 -171.8,424.1 -165.9,427.4 -171.9,430.6 			"/>
+			<g>
+				<polygon class="st0" points="-196,448.1 -196,434.4 -184.2,427.6 -172.4,434.4 -172.4,448.1 -184.2,454.9 				"/>
+				<path class="st2" d="M-184.2,428.3l11.2,6.5v12.9l-11.2,6.5l-11.2-6.5v-12.9L-184.2,428.3 M-184.2,426.9l-0.6,0.4l-11.2,6.5
+					l-0.6,0.4v0.7v12.9v0.7l0.6,0.4l11.2,6.5l0.6,0.4l0.6-0.4l11.2-6.5l0.6-0.4v-0.7v-12.9v-0.7l-0.6-0.4l-11.2-6.5L-184.2,426.9
+					L-184.2,426.9z"/>
+			</g>
+			<polygon class="st2" points="-193.6,435.5 -184,430.3 -175.1,435.4 -184.1,440.2 			"/>
+		</g>
+	</g>
+</svg>

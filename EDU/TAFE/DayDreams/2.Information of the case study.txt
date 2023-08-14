@@ -1,6 +1,6 @@
 2.Information of the case study.
 
-Current configuration:
+-Current configuration:
 •	Gigabit ethernet network cards on all computers and the servers.
 •	Cat 6 cables connecting the computers and server via L2 switch.
 •	Cisco Switches: Catalyst 2940.
@@ -10,10 +10,10 @@ Current configuration:
 •	BackupExec hardware and software is used to maintain a 3/2/1 backup plan.
 •	Many staff members complain that the network is too slow.
 
-Business concerns:
+-Business concerns:
 Daydreams systems need to become more secure with more redundancy, security elements, system monitoring and maintenance schedules. It would be good to keep a log of all staff system access and usage, plus access to data should be on need-to-know basis according to business role. Data should be accessible to staff as and when they need it from their location. 
 
-Strategic plan:
+-Strategic plan:
 •	Increase number of on-site employees from 8 to 20.
 •	Hire 10 work-from-home sales representatives that need 24/7 access to company’s resources and limited physical existence in the company’s premises (around 4 hours a week pp).
 •	Implement new and innovative approaches to selecting travel destinations/recreation and bookings.
@@ -21,12 +21,27 @@ Strategic plan:
 •	Extend markets to surrounding suburbs and interstate.
 •	A budget for the new technologies is set at $135,000.
 
-Organisational policies and procedures
+-Organisational policies and procedures
 •	Data privacy of staff and clients is to be maintained at all times.
 •	Copyright and Intellectual Property rights are to be respected at all times, for our own property and others.
 •	Transactions made in/by our business will have the clients’ best interest at heart.
 •	Negligence will not be tolerated, particularly around loss of information and breach of legislation. Staff must be aware and follow process.
 •	Honesty and respect are expected in all business dealings.
 
-Your role
+-Your role
 As a Senior System Administrator, and a member of the IT team, management has requested you to design and configure a virtual network for the company and fully document the process. Your plan should provide a reasonable approach to the next stage of the transition away from on-site operations and towards virtual/cloud-based operations.
+======================================================================================
+
+Business Needs	Cloud Resource	Comments
+
+Increased Storage 	Amazon S3	S3 standard single bucket in the local AWS region. Storage type = S3 Bucket + Amazon RDS
+Support for remote workers	AWS WorkSpaces	A managed, secure Desktop-as-a-Service (DaaS) solution
+Scalable Computing Power	AWS EC2	Virtual servers to handle increasing workloads
+Database Services	Amazon RDS	Managed relational database service for ease of management
+Network Security	AWS Security Group & Network ACLs	For controlling inbound and outbound traffic
+Reliable Email Service	Amazon WorkMail	To provide reliable email services
+Secure Remote Access	AWS VPN	For secure access to AWS resources
+Networking	AWS VPC	Virtual private cloud for secure and isolated network setup
+Network Traffic Monitoring	Amazon CloudWatch and VPC Flow Logs	For network monitoring and traffic analysis
+Reliable Backup Service	AWS Backup	To automate backup processes and maintain data redundancy
+

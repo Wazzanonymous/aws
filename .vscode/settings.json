@@ -1,4 +1,5 @@
 {
     "awsCfnAutoTemplateGenerator.templateFormat": "yaml",
-    "terminal.integrated.env.windows": {}
+    "terminal.integrated.env.windows": {},
+    "jest.rootPath": "C:\\Users\\wikin\\groot\\aws\\environment\\cdk\\jest.config.js"
 }

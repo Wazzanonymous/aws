@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "kddejong.vscode-cfn-lint"
+        "kddejong.vscode-cfn-lint",
+        "techer.open-in-browser"
     ]
 }

@@ -1,0 +1,242 @@
+SecretKey	3n6UcLUEw0G4BA6AIQ6Il4sV719ffQrN9nmXneNS
+CLIHostIP	54.235.24.192
+AccessKey	AKIAV2NWOV7MFAN6SQ65
+=====================================================================
+29.curl http://169.254.169.254/latest/dynamic/instance-identity/document | grep region
+ % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   476  100   476    0     0  77917      0 --:--:-- --:--:-- --:--:-- 79333
+  "region" : "us-east-1",
+  
+[ec2-user@cli-host ~]$less template1.yaml
+
+
+AWSTemplateFormatVersion: 2010-09-09
+Description: Lab template
+
+# Lab VPC with public subnet and Internet Gateway
+
+Parameters:
+
+  LabVpcCidr:
+    Type: String
+    Default: 10.0.0.0/20
+
+  PublicSubnetCidr:
+    Type: String
+    Default: 10.0.0.0/24
+
+  AmazonLinuxAMIID:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2
+
+  KeyName:
+    Type: String
+    Description: Keyname for the keypair that you will use to connect to the Web Server EC2 instance
+	
+	33.aws cloudformation create-stack \
+
+--stack-name myStack \
+
+--template-body file://template1.yaml \
+
+--capabilities CAPABILITY_NAMED_IAM \
+
+--parameters ParameterKey=KeyName,ParameterValue=vockey
+
+34.watch -n 5 -d \
+
+aws cloudformation describe-stack-resources \
+
+--stack-name myStack \
+
+--query 'StackResources[*].[ResourceType,ResourceStatus]' \
+
+--output table
+
+37.watch -n 5 -d \
+
+aws cloudformation describe-stacks \
+
+--stack-name myStack \
+
+--output table
+
+40.aws cloudformation describe-stack-events \
+
+--stack-name myStack \
+
+--query "StackEvents[?ResourceStatus == 'CREATE_FAILED']"
+
+43.aws cloudformation describe-stacks \
+
+--stack-name myStack \
+
+--output table
+
+45.aws cloudformation create-stack \
+
+--stack-name myStack \
+
+--template-body file://template1.yaml \
+
+--capabilities CAPABILITY_NAMED_IAM \
+
+--on-failure DO_NOTHING \
+
+--parameters ParameterKey=KeyName,ParameterValue=vockey
+
+46.watch -n 5 -d \
+
+aws cloudformation describe-stack-resources \
+
+--stack-name myStack \
+
+--query 'StackResources[*].[ResourceType,ResourceStatus]' \
+
+--output table
+
+47.aws cloudformation describe-stacks \
+
+--stack-name myStack \
+
+--output table
+
+48.aws cloudformation describe-stack-events \
+
+--stack-name myStack \
+
+--query "StackEvents[?ResourceStatus == 'CREATE_FAILED']"
+
+49.aws ec2 describe-instances \
+
+--filters "Name=tag:Name,Values='Web Server'" \
+
+--query 'Reservations[].Instances[].[State.Name,PublicIpAddress]'
+
+50.sudo tail -50 /var/log/cloud-init-output.log
+
+
+51.sudo cat /var/lib/cloud/instance/scripts/part-001
+
+54.vim template1.yaml
+
+55.cat template1.yaml | grep httpd
+
+56.aws cloudformation delete-stack --stack-name myStack
+
+57.watch -n 5 -d \
+
+aws cloudformation describe-stacks \
+
+--stack-name myStack \
+
+--output table
+
+58.aws cloudformation create-stack \
+
+--stack-name myStack \
+
+--template-body file://template1.yaml \
+
+--capabilities CAPABILITY_NAMED_IAM \
+
+--on-failure DO_NOTHING \
+
+--parameters ParameterKey=KeyName,ParameterValue=vockey
+
+59.watch -n 5 -d \
+
+aws cloudformation describe-stack-resources \
+
+--stack-name myStack \
+
+--query 'StackResources[*].[ResourceType,ResourceStatus]' \
+
+--output table
+
+60.aws cloudformation describe-stacks \
+
+--stack-name myStack \
+
+--output table
+------------------------------------------------------------ 
+
+70.bucketName=$(\
+
+aws cloudformation describe-stacks \
+
+--stack-name myStack \
+
+--query "Stacks[*].Outputs[?OutputKey \
+
+== 'BucketName'].[OutputValue]" \
+
+--output text)
+
+echo "bucketName = "$bucketName
+
+71.touch myfile
+
+72.aws s3 cp myfile s3://$bucketName/
+ 
+73.aws s3 ls $bucketName/
+
+74.aws cloudformation detect-stack-drift --stack-name myStack
+
+75.aws cloudformation describe-stack-drift-detection-status \
+
+--stack-drift-detection-id driftId
+
+76.aws cloudformation describe-stack-resource-drifts \
+
+--stack-name myStack
+
+77.aws cloudformation describe-stack-resources \
+
+--stack-name myStack \
+
+--query 'StackResources[*].[ResourceType,ResourceStatus,DriftInformation.StackResourceDriftStatus]' \
+
+78.aws cloudformation describe-stack-resource-drifts \
+
+--stack-name myStack \
+
+--stack-resource-drift-status-filters MODIFIED
+
+79.aws cloudformation update-stack \
+
+--stack-name myStack \
+
+--template-body file://template1.yaml \
+
+--parameters ParameterKey=KeyName,ParameterValue=vockey81.
+
+80.aws cloudformation delete-stack --stack-name myStack
+
+81.watch -n 5 -d \
+
+aws cloudformation describe-stack-resources \
+
+--stack-name myStack \
+
+--query 'StackResources[*].[ResourceType,ResourceStatus]' \
+
+--output table
+
+82.aws cloudformation describe-stacks \
+
+--stack-name myStack \
+
+--output table
+
+
+
+
+--output table
+
+
+
+
+
+

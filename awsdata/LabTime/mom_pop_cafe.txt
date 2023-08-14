@@ -1,0 +1,50 @@
+SecretKey	A55xoFPYf0K1kvo1K4PGXgoLera1+07EcECKhwNV
+MomPopCafePublicIP	3.239.149.78
+CliHostPublicIP	44.211.60.164
+AccessKey	AKIA4GHT3ZUPL42JZJW5
+CafeServerPubDNS	ec2-3-239-149-78.compute-1.amazonaws.com
+
+[default]
+aws_access_key_id=ASIA4GHT3ZUPF3YWRX4F
+aws_secret_access_key=Ph9IgBhqwYba6hbiQSz0vGdvlH7uFbKoxgz0ZXmQ
+aws_session_token=FwoGZXIvYXdzEEIaDJdFvl42GY49POahliK8AVhBHRm/RxFxmn809c4kWM+UBPqPAPtVnc6r/fOsXlP4ud2Rtd9voh0oRLm4X2c2ybVOkCa8Ml6TL3JhCELT4VECD5K1vG9m81DGJ21QdhfHmE0iImAG+mqnp4zbZOEXfeBFOuYrwl+QRCwKryf938eKN9LvD+KIeHlPHmS7tz+LwTSG1tVSQITgiZmLAUXKJuIr2E+72fhyNHmARPTl/6Kd3VrjYljL1yoNdhC/k35L2nAfui5+e8hwGd5DKJPqiZkGMi2DEoggJITYV+MikjxmyRbQCt9fNX4WqwqCg02AtqiLk20DFSgJAE8Ej6d6Yhc=
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "lambda.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}
+
+======================================================
+
+    /mompopcafe/dbUrl - ec2-3-239-149-78.compute-1.amazonaws.com
+
+    /mompopcafe/dbName - mom_pop_db
+
+    /mompopcafe/dbUser - root
+
+    /mompopcafe/dbPassword - re:St@rt!9
+
+{
+  "dbUrl": "<value of /mompopcafe/dbUrl parameter>",
+  "dbName": "<value of /mompopcafe/dbName parameter>",
+  "dbUser": "<value of /mompopcafe/dbUser parameter>",
+  "dbPassword": "<value of /mompopcafe/dbPassword parameter>"
+}
+--------------------------------------------------
+{
+  "dbUrl": "ec2-3-239-149-78.compute-1.amazonaws.com",
+  "dbName": "mom_pop_db",
+  "dbUser": "root",
+  "dbPassword": "re:St@rt!9"
+}
+--------------------------------------------------
+
+

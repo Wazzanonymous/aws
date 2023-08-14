@@ -1,0 +1,173 @@
+Access Key: AKIA5TEAVDRPMIGCIZC3
+
+Secret Access Key: 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
+
+Set relay state: https://console.aws.amazon.com/ec2/
+
+arn:aws:iam::934425205854:user/wikin
+
+Root
+r-su75
+grpi-Ikin4lchemy
+ou-su75-yn8ydwy7
+orgu-Administrator
+ou-su75-nsoeg69t
+orgu-wikin
+ou-su75-gbrxrfew
+benjiikin@yahoo.com
+934425205854  |  benjiikin@yahoo.com
+
+===================================================================
+Put-Resource-Policy
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Fully_manage_backup_policies",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "135791357913"
+            }
+            "Action": [
+                "organizations:DescribeOrganization",
+                "organizations:ListAccounts",
+                "organizations:CreatePolicy",
+                "organizations:DescribePolicy",
+                "organizations:UpdatePolicy",
+                "organizations:DeletePolicy",
+                "organizations:AttachPolicy",
+                "organizations:DetachPolicy"
+            ],
+            "Resource": [
+                "arn:aws:organizations::246802468024:root/o-abcdef/r-pqrstu",
+                "arn:aws:organizations::246802468024:ou/o-abcdef/*",
+                "arn:aws:organizations::246802468024:account/o-abcdef/*",
+                "arn:aws:organizations::246802468024:organization/policy/backup_policy/*",
+            ],
+            "Condition": {
+                "StringLikeIfExists": {
+                    "organizations:PolicyType": [
+                        "BACKUP_POLICY"
+                    ]
+                }
+            }
+        }
+    ]
+}
+
+
+LINUX/MAC
+
+ Get credentials for AdministratorAccess
+Create access for the account benjiikin@yahoo.com (9344-2520-5854) with AdministratorAccess
+Use any of the following options to access AWS resources programmatically or from the AWS CLI. You can retrieve new credentials as often as needed.
+
+    macOS and Linux 
+
+AWS IAM Identity Center credentials (Recommended)
+To extend the duration of your credentials, we recommend you configure the AWS CLI to retrieve them automatically using the aws configure sso command. Learn more
+SSO Start URL
+SSO Region
+Option 1: Set AWS environment variables (Short-term credentials)
+Run the following commands in your terminal. Learn more
+export AWS_ACCESS_KEY_ID="ASIA5TEAVDRPCYADXFEN"
+export AWS_SECRET_ACCESS_KEY="4YuRSgGySEooyo+XNiZMgRI44lgz7q1eTQaxmU/h"
+export AWS_SESSION_TOKEN="IQoJb3JpZ2luX2VjEPj//////////wEaCXVzLWVhc3QtMSJHMEUCIQDRVoVh6x3F5HGec1LtHvfQAny63HE7F7dm3nlayi5w7QIgLkgACHbMdTi5+QHS64XRrru1z4pfxkhr+XoxN5oqR1oqjQQIoP//////////ARAAGgw5MzQ0MjUyMDU4NTQiDNBelIZVidnf3LQZ1yrhA2a9/nErsdjx/af5kO0/oPlH22I6HhyBvs1I6kBTinyLztMjov1KLzAfC3zEhRcHqNuW5n/MFoPSk/mW+FUyXMs3PVkWoxyNPQo6JLAUdOqF8iQ+2RGHpP9EOvwiZ0719sx0I7dWoIKeDxxvhYhcmxU8joG3jFZn1i5Cl312ItLvybaA0cZwCjRah3WD3zjT3bbwfJXSA6sL3/2Z7io6Qh71x+6WFDLTLr0Eay01HaKOTth2578OnBubkFB1rUUN2qLfJ7KaDhIjk2ZQtMR+4uz8JOV1sv1wy069x1jzKir043x9FiqVO5xhAvVkOV47/XPMChzf1pcn1GOHlzDdPGRRwCkhLpv0wo1sIIImThq43OqdYnoNs1v7J3XyKAiVHeqe4qkjc0rzQwjFr2ejUnyhPhncUnKAxM2z4G09E3KU+KGWiMPPBpNyHkd1bS9LbFLQURpUME4oS9kABSwSakZZ4JjHEZ1h6za/vjzGW48IGkJ/Ki5PEkNwaVhlIwrVxfVOMT9pPjBJixnNcmDgg6t47AO2RGb0RHxS123bqjiURJYrczrscTKK/ZYBP5KMkkWT/dR0x7HBMu8mWG8szLqPjUlS1LrAQgQpLmGkQ7tFYU6vFBo3+VHgCPjF0coYEywwrvbMpgY6pgFE3kk+58cYfxidcmuU536bGPcmCK7OrBcCwLUuwWzigKSdD+T0Tn+tVxGGnQaGH8ld0G7yYXOBaJtp5T76Zmm1F3S1UArluJkrCxDrHC1UtrwiSzGv+oU52rOGup0Q/nFKiK0/TankzoHmx0jg7DWyjZ80s/dmc/35lx2qYXcV6SlJmJAl9pPl0vJKFAAFd2mlIbOSCRZDwWa5AC1ZHLjLytohFeWL"
+Option 2: Manually add a profile to your AWS credentials file (Short-term credentials)
+Paste the following text in your AWS credentials file (typically located in ~/.aws/credentials). Learn more
+[934425205854_AdministratorAccess]
+aws_access_key_id = ASIA5TEAVDRPCYADXFEN
+aws_secret_access_key = 4YuRSgGySEooyo+XNiZMgRI44lgz7q1eTQaxmU/h
+aws_session_token = IQoJb3JpZ2luX2VjEPj//////////wEaCXVzLWVhc3QtMSJHMEUCIQDRVoVh6x3F5HGec1LtHvfQAny63HE7F7dm3nlayi5w7QIgLkgACHbMdTi5+QHS64XRrru1z4pfxkhr+XoxN5oqR1oqjQQIoP//////////ARAAGgw5MzQ0MjUyMDU4NTQiDNBelIZVidnf3LQZ1yrhA2a9/nErsdjx/af5kO0/oPlH22I6HhyBvs1I6kBTinyLztMjov1KLzAfC3zEhRcHqNuW5n/MFoPSk/mW+FUyXMs3PVkWoxyNPQo6JLAUdOqF8iQ+2RGHpP9EOvwiZ0719sx0I7dWoIKeDxxvhYhcmxU8joG3jFZn1i5Cl312ItLvybaA0cZwCjRah3WD3zjT3bbwfJXSA6sL3/2Z7io6Qh71x+6WFDLTLr0Eay01HaKOTth2578OnBubkFB1rUUN2qLfJ7KaDhIjk2ZQtMR+4uz8JOV1sv1wy069x1jzKir043x9FiqVO5xhAvVkOV47/XPMChzf1pcn1GOHlzDdPGRRwCkhLpv0wo1sIIImThq43OqdYnoNs1v7J3XyKAiVHeqe4qkjc0rzQwjFr2ejUnyhPhncUnKAxM2z4G09E3KU+KGWiMPPBpNyHkd1bS9LbFLQURpUME4oS9kABSwSakZZ4JjHEZ1h6za/vjzGW48IGkJ/Ki5PEkNwaVhlIwrVxfVOMT9pPjBJixnNcmDgg6t47AO2RGb0RHxS123bqjiURJYrczrscTKK/ZYBP5KMkkWT/dR0x7HBMu8mWG8szLqPjUlS1LrAQgQpLmGkQ7tFYU6vFBo3+VHgCPjF0coYEywwrvbMpgY6pgFE3kk+58cYfxidcmuU536bGPcmCK7OrBcCwLUuwWzigKSdD+T0Tn+tVxGGnQaGH8ld0G7yYXOBaJtp5T76Zmm1F3S1UArluJkrCxDrHC1UtrwiSzGv+oU52rOGup0Q/nFKiK0/TankzoHmx0jg7DWyjZ80s/dmc/35lx2qYXcV6SlJmJAl9pPl0vJKFAAFd2mlIbOSCRZDwWa5AC1ZHLjLytohFeWL
+Option 3: Use individual values in your AWS service client (Short-term credentials)
+Paste these values directly into your code. Learn more
+AWS Access Key ID
+AWS Secret Access Key
+AWS Session Token
+
+WINDOWS
+
+AWS IAM Identity Center credentials (Recommended)
+To extend the duration of your credentials, we recommend you configure the AWS CLI to retrieve them automatically using the aws configure sso command. Learn more
+SSO Start URL
+SSO Region
+Option 1: Set AWS environment variables (Short-term credentials)
+Run the following commands in your terminal. Learn more
+SET AWS_ACCESS_KEY_ID=ASIA5TEAVDRPCYADXFEN
+SET AWS_SECRET_ACCESS_KEY=4YuRSgGySEooyo+XNiZMgRI44lgz7q1eTQaxmU/h
+SET AWS_SESSION_TOKEN=IQoJb3JpZ2luX2VjEPj//////////wEaCXVzLWVhc3QtMSJHMEUCIQDRVoVh6x3F5HGec1LtHvfQAny63HE7F7dm3nlayi5w7QIgLkgACHbMdTi5+QHS64XRrru1z4pfxkhr+XoxN5oqR1oqjQQIoP//////////ARAAGgw5MzQ0MjUyMDU4NTQiDNBelIZVidnf3LQZ1yrhA2a9/nErsdjx/af5kO0/oPlH22I6HhyBvs1I6kBTinyLztMjov1KLzAfC3zEhRcHqNuW5n/MFoPSk/mW+FUyXMs3PVkWoxyNPQo6JLAUdOqF8iQ+2RGHpP9EOvwiZ0719sx0I7dWoIKeDxxvhYhcmxU8joG3jFZn1i5Cl312ItLvybaA0cZwCjRah3WD3zjT3bbwfJXSA6sL3/2Z7io6Qh71x+6WFDLTLr0Eay01HaKOTth2578OnBubkFB1rUUN2qLfJ7KaDhIjk2ZQtMR+4uz8JOV1sv1wy069x1jzKir043x9FiqVO5xhAvVkOV47/XPMChzf1pcn1GOHlzDdPGRRwCkhLpv0wo1sIIImThq43OqdYnoNs1v7J3XyKAiVHeqe4qkjc0rzQwjFr2ejUnyhPhncUnKAxM2z4G09E3KU+KGWiMPPBpNyHkd1bS9LbFLQURpUME4oS9kABSwSakZZ4JjHEZ1h6za/vjzGW48IGkJ/Ki5PEkNwaVhlIwrVxfVOMT9pPjBJixnNcmDgg6t47AO2RGb0RHxS123bqjiURJYrczrscTKK/ZYBP5KMkkWT/dR0x7HBMu8mWG8szLqPjUlS1LrAQgQpLmGkQ7tFYU6vFBo3+VHgCPjF0coYEywwrvbMpgY6pgFE3kk+58cYfxidcmuU536bGPcmCK7OrBcCwLUuwWzigKSdD+T0Tn+tVxGGnQaGH8ld0G7yYXOBaJtp5T76Zmm1F3S1UArluJkrCxDrHC1UtrwiSzGv+oU52rOGup0Q/nFKiK0/TankzoHmx0jg7DWyjZ80s/dmc/35lx2qYXcV6SlJmJAl9pPl0vJKFAAFd2mlIbOSCRZDwWa5AC1ZHLjLytohFeWL
+Option 2: Manually add a profile to your AWS credentials file (Short-term credentials)
+Paste the following text in your AWS credentials file (typically located in ~/.aws/credentials). Learn more
+[934425205854_AdministratorAccess]
+aws_access_key_id = ASIA5TEAVDRPCYADXFEN
+aws_secret_access_key = 4YuRSgGySEooyo+XNiZMgRI44lgz7q1eTQaxmU/h
+aws_session_token = IQoJb3JpZ2luX2VjEPj//////////wEaCXVzLWVhc3QtMSJHMEUCIQDRVoVh6x3F5HGec1LtHvfQAny63HE7F7dm3nlayi5w7QIgLkgACHbMdTi5+QHS64XRrru1z4pfxkhr+XoxN5oqR1oqjQQIoP//////////ARAAGgw5MzQ0MjUyMDU4NTQiDNBelIZVidnf3LQZ1yrhA2a9/nErsdjx/af5kO0/oPlH22I6HhyBvs1I6kBTinyLztMjov1KLzAfC3zEhRcHqNuW5n/MFoPSk/mW+FUyXMs3PVkWoxyNPQo6JLAUdOqF8iQ+2RGHpP9EOvwiZ0719sx0I7dWoIKeDxxvhYhcmxU8joG3jFZn1i5Cl312ItLvybaA0cZwCjRah3WD3zjT3bbwfJXSA6sL3/2Z7io6Qh71x+6WFDLTLr0Eay01HaKOTth2578OnBubkFB1rUUN2qLfJ7KaDhIjk2ZQtMR+4uz8JOV1sv1wy069x1jzKir043x9FiqVO5xhAvVkOV47/XPMChzf1pcn1GOHlzDdPGRRwCkhLpv0wo1sIIImThq43OqdYnoNs1v7J3XyKAiVHeqe4qkjc0rzQwjFr2ejUnyhPhncUnKAxM2z4G09E3KU+KGWiMPPBpNyHkd1bS9LbFLQURpUME4oS9kABSwSakZZ4JjHEZ1h6za/vjzGW48IGkJ/Ki5PEkNwaVhlIwrVxfVOMT9pPjBJixnNcmDgg6t47AO2RGb0RHxS123bqjiURJYrczrscTKK/ZYBP5KMkkWT/dR0x7HBMu8mWG8szLqPjUlS1LrAQgQpLmGkQ7tFYU6vFBo3+VHgCPjF0coYEywwrvbMpgY6pgFE3kk+58cYfxidcmuU536bGPcmCK7OrBcCwLUuwWzigKSdD+T0Tn+tVxGGnQaGH8ld0G7yYXOBaJtp5T76Zmm1F3S1UArluJkrCxDrHC1UtrwiSzGv+oU52rOGup0Q/nFKiK0/TankzoHmx0jg7DWyjZ80s/dmc/35lx2qYXcV6SlJmJAl9pPl0vJKFAAFd2mlIbOSCRZDwWa5AC1ZHLjLytohFeWL
+Option 3: Use individual values in your AWS service client (Short-term credentials)
+Paste these values directly into your code. Learn more
+AWS Access Key ID
+AWS Secret Access Key
+AWS Session Token
+
+
+POWERSHELL
+
+
+AWS IAM Identity Center credentials (Recommended)
+To extend the duration of your credentials, we recommend you configure the AWS CLI to retrieve them automatically using the aws configure sso command. Learn more
+SSO Start URL
+SSO Region
+Option 1: Set AWS environment variables (Short-term credentials)
+Paste the following text into PowerShell to set the AWS environment variables. Learn more
+$Env:AWS_ACCESS_KEY_ID="ASIA5TEAVDRPCYADXFEN"
+$Env:AWS_SECRET_ACCESS_KEY="4YuRSgGySEooyo+XNiZMgRI44lgz7q1eTQaxmU/h"
+$Env:AWS_SESSION_TOKEN="IQoJb3JpZ2luX2VjEPj//////////wEaCXVzLWVhc3QtMSJHMEUCIQDRVoVh6x3F5HGec1LtHvfQAny63HE7F7dm3nlayi5w7QIgLkgACHbMdTi5+QHS64XRrru1z4pfxkhr+XoxN5oqR1oqjQQIoP//////////ARAAGgw5MzQ0MjUyMDU4NTQiDNBelIZVidnf3LQZ1yrhA2a9/nErsdjx/af5kO0/oPlH22I6HhyBvs1I6kBTinyLztMjov1KLzAfC3zEhRcHqNuW5n/MFoPSk/mW+FUyXMs3PVkWoxyNPQo6JLAUdOqF8iQ+2RGHpP9EOvwiZ0719sx0I7dWoIKeDxxvhYhcmxU8joG3jFZn1i5Cl312ItLvybaA0cZwCjRah3WD3zjT3bbwfJXSA6sL3/2Z7io6Qh71x+6WFDLTLr0Eay01HaKOTth2578OnBubkFB1rUUN2qLfJ7KaDhIjk2ZQtMR+4uz8JOV1sv1wy069x1jzKir043x9FiqVO5xhAvVkOV47/XPMChzf1pcn1GOHlzDdPGRRwCkhLpv0wo1sIIImThq43OqdYnoNs1v7J3XyKAiVHeqe4qkjc0rzQwjFr2ejUnyhPhncUnKAxM2z4G09E3KU+KGWiMPPBpNyHkd1bS9LbFLQURpUME4oS9kABSwSakZZ4JjHEZ1h6za/vjzGW48IGkJ/Ki5PEkNwaVhlIwrVxfVOMT9pPjBJixnNcmDgg6t47AO2RGb0RHxS123bqjiURJYrczrscTKK/ZYBP5KMkkWT/dR0x7HBMu8mWG8szLqPjUlS1LrAQgQpLmGkQ7tFYU6vFBo3+VHgCPjF0coYEywwrvbMpgY6pgFE3kk+58cYfxidcmuU536bGPcmCK7OrBcCwLUuwWzigKSdD+T0Tn+tVxGGnQaGH8ld0G7yYXOBaJtp5T76Zmm1F3S1UArluJkrCxDrHC1UtrwiSzGv+oU52rOGup0Q/nFKiK0/TankzoHmx0jg7DWyjZ80s/dmc/35lx2qYXcV6SlJmJAl9pPl0vJKFAAFd2mlIbOSCRZDwWa5AC1ZHLjLytohFeWL"
+Option 2: Manually add a profile to your AWS credentials file (Short-term credentials)
+Paste the following text in your AWS credentials file (typically located in ~/.aws/credentials). Learn more
+[934425205854_AdministratorAccess]
+aws_access_key_id = ASIA5TEAVDRPCYADXFEN
+aws_secret_access_key = 4YuRSgGySEooyo+XNiZMgRI44lgz7q1eTQaxmU/h
+aws_session_token = IQoJb3JpZ2luX2VjEPj//////////wEaCXVzLWVhc3QtMSJHMEUCIQDRVoVh6x3F5HGec1LtHvfQAny63HE7F7dm3nlayi5w7QIgLkgACHbMdTi5+QHS64XRrru1z4pfxkhr+XoxN5oqR1oqjQQIoP//////////ARAAGgw5MzQ0MjUyMDU4NTQiDNBelIZVidnf3LQZ1yrhA2a9/nErsdjx/af5kO0/oPlH22I6HhyBvs1I6kBTinyLztMjov1KLzAfC3zEhRcHqNuW5n/MFoPSk/mW+FUyXMs3PVkWoxyNPQo6JLAUdOqF8iQ+2RGHpP9EOvwiZ0719sx0I7dWoIKeDxxvhYhcmxU8joG3jFZn1i5Cl312ItLvybaA0cZwCjRah3WD3zjT3bbwfJXSA6sL3/2Z7io6Qh71x+6WFDLTLr0Eay01HaKOTth2578OnBubkFB1rUUN2qLfJ7KaDhIjk2ZQtMR+4uz8JOV1sv1wy069x1jzKir043x9FiqVO5xhAvVkOV47/XPMChzf1pcn1GOHlzDdPGRRwCkhLpv0wo1sIIImThq43OqdYnoNs1v7J3XyKAiVHeqe4qkjc0rzQwjFr2ejUnyhPhncUnKAxM2z4G09E3KU+KGWiMPPBpNyHkd1bS9LbFLQURpUME4oS9kABSwSakZZ4JjHEZ1h6za/vjzGW48IGkJ/Ki5PEkNwaVhlIwrVxfVOMT9pPjBJixnNcmDgg6t47AO2RGb0RHxS123bqjiURJYrczrscTKK/ZYBP5KMkkWT/dR0x7HBMu8mWG8szLqPjUlS1LrAQgQpLmGkQ7tFYU6vFBo3+VHgCPjF0coYEywwrvbMpgY6pgFE3kk+58cYfxidcmuU536bGPcmCK7OrBcCwLUuwWzigKSdD+T0Tn+tVxGGnQaGH8ld0G7yYXOBaJtp5T76Zmm1F3S1UArluJkrCxDrHC1UtrwiSzGv+oU52rOGup0Q/nFKiK0/TankzoHmx0jg7DWyjZ80s/dmc/35lx2qYXcV6SlJmJAl9pPl0vJKFAAFd2mlIbOSCRZDwWa5AC1ZHLjLytohFeWL
+Option 3: Use individual values in your AWS service client (Short-term credentials)
+Paste these values directly into your code. Learn more
+AWS Access Key ID
+AWS Secret Access Key
+AWS Session Token
+
+aws organizations put-resource-policy --content
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Fully_manage_backup_policies",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "135791357913"
+            }
+            "Action": [
+                "organizations:DescribeOrganization",
+                "organizations:ListAccounts",
+                "organizations:CreatePolicy",
+                "organizations:DescribePolicy",
+                "organizations:UpdatePolicy",
+                "organizations:DeletePolicy",
+                "organizations:AttachPolicy",
+                "organizations:DetachPolicy"
+            ],
+            "Resource": [
+                "arn:aws:organizations::246802468024:root/o-abcdef/r-pqrstu",
+                "arn:aws:organizations::246802468024:ou/o-abcdef/*",
+                "arn:aws:organizations::246802468024:account/o-abcdef/*",
+                "arn:aws:organizations::246802468024:organization/policy/backup_policy/*",
+            ],
+            "Condition": {
+                "StringLikeIfExists": {
+                    "organizations:PolicyType": [
+                        "BACKUP_POLICY"
+                    ]
+                }
+            }
+        }
+    ]
+}
+
+

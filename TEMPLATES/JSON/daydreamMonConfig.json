@@ -1,0 +1,33 @@
+{
+  "MaxCount": 1,
+  "MinCount": 1,
+  "ImageId": "ami-022e1a32d3f742bd8",
+  "InstanceType": "t2.micro",
+  "KeyName": "daydream",
+  "EbsOptimized": false,
+  "NetworkInterfaces": [
+    {
+      "DeviceIndex": 0,
+      "Groups": [
+        "sg-07f1ae644904bd433"
+      ]
+    }
+  ],
+  "Monitoring": {
+    "Enabled": true
+  },
+  "IamInstanceProfile": {
+    "Arn": "arn:aws:iam::934425205854:instance-profile/cloud9/AWSCloud9SSMInstanceProfile"
+  },
+  "MetadataOptions": {
+    "InstanceMetadataTags": "enabled"
+  },
+  "PrivateDnsNameOptions": {
+    "HostnameType": "resource-name",
+    "EnableResourceNameDnsARecord": true,
+    "EnableResourceNameDnsAAAARecord": false
+  },
+  "MaintenanceOptions": {
+    "AutoRecovery": "default"
+  }
+}

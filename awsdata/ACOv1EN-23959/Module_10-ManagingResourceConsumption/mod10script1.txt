@@ -1,0 +1,43 @@
+Module 10 -- Tagging
+
+SecretKey	aJiIOA2oab1n3Jl6Qg2DqobgCOtuisWlyYjlneqt
+AccessKey	AKIAU4GYJJYJXUM6R6F4
+Command Host Public IP: 3.94.57.112
+--------------------------------------------------------------------------
+
+26.aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem"
+
+27.aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].InstanceId'
+
+28.aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone}'
+
+29.aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone,Project:Tags[?Key==`Project`] | [0].Value}'
+Tags[?Key==\`Project\`] | [0].Value
+
+30.aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone,Project:Tags[?Key==`Project`] | [0].Value,Environment:Tags[?Key==`Environment`] | [0].Value,Version:Tags[?Key==`Version`] | [0].Value}'
+
+31.aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" "Name=tag:Environment,Values=development" --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone,Project:Tags[?Key==`Project`] | [0].Value,Environment:Tags[?Key==`Environment`] | [0].Value,Version:Tags[?Key==`Version`] | [0].Value}'
+
+32.nano change-resource-tags.sh
+
+33.#!/bin/bash
+
+ids=$(aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" "Name=tag:Environment,Values=development" --query 'Reservations[*].Instances[*].InstanceId' --output text)
+
+aws ec2 create-tags --resources $ids --tags 'Key=Version,Value=1.1'
+
+34../change-resource-tags.sh
+
+35.aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].{ID:InstanceId, AZ:Placement.AvailabilityZone, Project:Tags[?Key==`Project`] |[0].Value,Environment:Tags[?Key==`Environment`] | [0].Value,Version:Tags[?Key==`Version`] | [0].Value}'
+
+36.cd aws-tools
+
+37.nano stopinator.php
+
+39../stopinator.php -t"Project=ERPSystem;Environment=development"
+
+43../stopinator.php -t"Project=ERPSystem;Environment=development" -s
+
+45.nano terminate-instances.php
+
+58../terminate-instances.php -region <region> -subnetid <subnet-id>

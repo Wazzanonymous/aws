@@ -1,11 +1,12 @@
-3.Questions of the case study.
+3.a.Questions of the case study.
 
 -Section A – Design a Virtual Network 
 (ICTCLD506_AT2_Design_warrenIkin.docx)
 
 NOTE: In Part 2 question 2.1 you will develop instructions for  a topology for the virtual network. You may want to return to the initial questions once you have completed that topology as it will be helpful in developing these solutions.
 
-Part 1 – Prepare to Design and Configure the Virtual Network
+-Part 1 – Prepare to Design and Configure the Virtual Network
+
 In preparation, research cloud vendor service providers to identify sources of information that will be helpful in designing and configuring a virtual network in a cloud platform, including business and legislative requirements. In particular, focus on AWS as one of the industry leaders, to locate industry standards, procedures, and guidelines.
  
 1.1	List all of the networking requirements for Daydreams Travel Agency based on the business needs in the case study. List the cloud resources needed to meet these requirements.
@@ -19,14 +20,12 @@ Increased Storage 	Amazon S3	S3 standard single bucket in the local AWS region
 Security tool	Applied to …	Comments
 Amazon IAM	To control and monitor access and identity for all components	Identify users and roles before configuring IAM
 		
-
--Section B – Configure a virtual network and peering
-(ICTCLD506_AT2_Configuration_warrenIkin.docx)
+-Part 2 – Design and Configure the Virtual Network
 
 2.1	List and describe the AWS tools, resources, gateways, and services required to build a multi-tier solution for the case study company. Use the table below as a framework. Use the third column to indicate the procedure or command you might use to achieve the implementation. You may add rows and columns as needed. Your completed table must address how you would use SSH and VPN to support the network.
 Tools/Resources Gateways/Services	Applied to …	How will you implement
 Amazon S3	Will provide storage for all DTA operations in the local geographical area	https://s3.region code.amazonaws.com.bucketname
--
+
 2.2	Create instructions for a logical topology for your virtual network. Show your subnet scheme using the table below as a template. Add rows as needed.
 
 TOPOLOGY
@@ -35,6 +34,9 @@ Amazon S3	192.168.2.1	255.255.255.0
 		
 		
 		
+
+-Section B – Configure a virtual network and peering
+(ICTCLD506_AT2_Configuration_warrenIkin.docx)
 
 2.3	Insert instructions to show how you have enabled the gateways and services according to the table in question 2.1. These can include dialog boxes from the AWS management console showing each activity, and/or operations taken at the command line interface. You may also show code fragments if you are using code in your development.
 
@@ -61,7 +63,7 @@ e)	What did you learn from that problem solving experience?
 -Section C – Configure Virtual Network Peering
 (ICTCLD506_AT2_Peering_warrenIkin.docx)
 
-Part 3 – Establish Peering Connection between Two Virtual Networks 
+-Part 3 – Establish Peering Connection between Two Virtual Networks 
 3.1	Include screen shots to show how you established a VPC peering connection between two VPCs. 
 	Your peering connection should allow routing of traffic between the two VPCs using private IPv4 addresses. 
 

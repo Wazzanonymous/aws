@@ -1,0 +1,180 @@
+Create a logical topology for virtual network below: 
+ Use the table below as a framework. Use the third column to indicate the procedure or command you might use to achieve the implementation. Your completed table must address how you would use SSH and VPN to support the network.
+ 
+Tools/Resources Gateways/Services	Applied to …	How will you implement
+Amazon S3	Will provide storage for all DTA operations in the local geographical area	Via the AWS management console or AWS CLI, create a new S3 bucket in the selected region - us-east-1
+Amazon EC2	To host applications and provide scalable compute capacity	Deploy EC2 instances using the AWS management console, configure as per application requirements
+AWS VPC	To create an isolated network for DTA's resources	Create a new VPC in AWS, configure subnets, route tables, and AWS IGW.
+AWS IAM	Manage user access and permissions	Create IAM roles/policies for specific users or services to control access to AWS resources
+Amazon RDS	Database service for managing relational databases	Setup RDS instances for application database requirements, ensuring proper security group settings
+AWS VPN	To securely access DTA's network resources	Set up a Site-to-Site VPN connection between the on-premises network and AWS VPC
+AWS Direct Connect	To establish a dedicated network connection from on-premises to AWS	Setup Direct Connect for consistent network performance
+AWS Route 53	To manage DNS and direct end-user requests to the application	Configure Route 53 to route users to application hosted on EC2 instances
+Amazon CloudFront	To deliver content securely and with low latency	Set up CloudFront distribution for application to speed up distribution of files and secure applications
+AWS CloudTrail	For governance, compliance, and auditing of AWS environment	Enable CloudTrail to log and retain account activity related to actions across AWS infrastructure
+AWS CloudWatch	For monitoring resources and applications on AWS	Set up CloudWatch alarms and metrics to monitor EC2 instances and RDS databases
+Amazon EBS	Provides persistent block storage for EC2 instances	Attach EBS volumes to EC2 instances for application data storage
+AWS Lambda	To run code without provisioning or managing servers	Use Lambda to automate tasks such as image processing or log file analysis
+Amazon S3 Transfer Acceleration	Speed up transfer of files over long distances	Enable S3 Transfer Acceleration for the S3 bucket to speed up uploads to the bucket
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+To build an AWS Cloud network for DayDreams Travel Agency, a good starting point would be to set up the Virtual Private Cloud (VPC). The VPC acts as an isolated network within AWS where you can launch your AWS resources. Here are the steps you can follow:
+
+1. Define your network requirements: Consider the number of subnets , IP address ranges, and any connectivity requirements with your on-premises network or other AWS resources.
+
+2. Create a VPC: In the AWS Management Console, navigate to the VPC service and click on "Create VPC." Specify the IP address range for your VPC and enable DNS resolution and DNS hostnames if required.
+
+3. Create subnets: Within the VPC, create subnets in different Availability Zones (AZs) to ensure high availability and fault tolerance. Assign IP address ranges to each subnet based on your network requirements.
+
+4. Configure route tables: Create route tables and associate them with the appropriate subnets. Configure the routing rules to enable communication between subnets within the VPC and with external networks.
+
+5. Set up internet connectivity: To enable internet access for your resources, create an internet gateway (IGW) and attach it to the VPC. Update the route tables to route traffic destined for the internet to the IGW.
+
+6. Network security: Implement network security measures by setting up security groups and network access control lists (ACLs) to control inbound and outbound traffic to your resources.
+
+7. Connect with on-premises network (if applicable): If you have an on-premises network, you can establish connectivity to the VPC using either a VPN connection or AWS Direct Connect.
+
+Once the VPC is set up, you can proceed with provisioning other resources such as EC2 instances, RDS databases, and other services within the VPC. You can also consider implementing additional services like AWS CloudFront for content delivery, AWS WAF for web application firewall, or AWS Shield for DDoS protection based on your requirements.
+
+Remember to follow AWS best practices, security guidelines, and consider implementing appropriate monitoring and logging mechanisms to ensure the availability, performance, and security of your AWS Cloud network.
+
+I hope this gives you a starting point for building the AWS Cloud network for DayDreams Travel Agency. If you have any further questions, feel free to ask!
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+======================================================
+Business concerns:
+Daydreams systems need to become more secure with more redundancy, security elements, system monitoring and maintenance schedules. It would be good to keep a log of all staff system access and usage, plus access to data should be on need-to-know basis according to business role. Data should be accessible to staff as and when they need it from their location. 
+
+Strategic plan:
+•	Increase number of on-site employees from 8 to 20.
+•	Hire 10 work-from-home sales representatives that need 24/7 access to company’s resources and limited physical existence in the company’s premises (around 4 hours a week pp).
+•	Implement new and innovative approaches to selecting travel destinations/recreation and bookings.
+•	Make creative use of emerging technologies to meet the needs of our staff and therefore our clients.
+•	Extend markets to surrounding suburbs and interstate.
+•	A budget for the new technologies is set at $135,000.
+
+Organisational policies and procedures
+•	Data privacy of staff and clients is to be maintained at all times.
+•	Copyright and Intellectual Property rights are to be respected at all times, for our own property and others.
+•	Transactions made in/by our business will have the clients’ best interest at heart.
+•	Negligence will not be tolerated, particularly around loss of information and breach of legislation. Staff must be aware and follow process.
+•	Honesty and respect are expected in all business dealings.
+=======================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Thank you for providing the additional business concerns and strategic plan for DayDreams Travel Agency. Based on these requirements, here are some suggestions for building a secure and efficient AWS Cloud network:
+
+1. Security and Redundancy:
+   - Implement AWS Identity and Access Management (IAM) to manage user access and permissions. Use IAM roles, policies, and multi-factor authentication (MFA) to enforce secure access to AWS resources.
+   - Enable AWS CloudTrail to log all staff system access and usage, providing an audit trail for compliance and security purposes.
+   - Utilize AWS Config to monitor and track the configuration of AWS resources, ensuring compliance with organizational policies and identifying any unauthorized changes.
+   - Implement AWS Security Groups and Network ACLs to control inbound and outbound traffic, enforcing the principle of least privilege.
+   - Utilize AWS Availability Zones and Auto Scaling to provide redundancy and high availability for your applications and resources.
+   - Enable automated backups and implement disaster recovery strategies using services like AWS Backup and AWS Disaster Recovery.
+
+2. System Monitoring and Maintenance:
+   - Utilize AWS CloudWatch to monitor the performance and health of your AWS resources. Set up alarms and notifications for proactive monitoring.
+   - Implement AWS Systems Manager for centralized system management, including patch management, maintenance windows, and software inventory.
+   - Configure AWS CloudFormation StackSets to deploy and manage consistent infrastructure across multiple accounts and regions, ensuring standardization and ease of maintenance.
+
+3. Data Accessibility and Role-based Access Control:
+   - Implement Amazon Virtual Private Cloud (VPC) with private and public subnets to securely isolate and control access to resources.
+   - Utilize AWS Direct Connect or VPN for secure remote access to the VPC, enabling work-from-home employees to access company resources.
+   - Implement AWS Directory Service or AWS Single Sign-On (SSO) for centralized user management and role-based access control (RBAC) to enforce the principle of least privilege.
+   - Utilize AWS DataSync or AWS Storage Gateway for seamless and secure data synchronization and access across multiple locations and remote offices.
+
+4. Innovative Approaches and Emerging Technologies:
+   - Leverage AWS services like Amazon SageMaker for machine learning-based recommendation systems to assist with travel destination selection and bookings.
+   - Explore serverless computing with AWS Lambda for executing server-side logic and building scalable and cost-effective microservices.
+   - Utilize AWS IoT services for integrating emerging technologies like smart devices and sensors to enhance the customer experience and automate processes.
+
+5. Market Expansion and Budget:
+   - Utilize AWS Global Infrastructure to extend your services to surrounding suburbs and interstate locations, ensuring low latency and high availability for your customers.
+   - Leverage AWS Cost Management tools and services to monitor and optimize your AWS usage, ensuring efficient utilization of the allocated budget.
+
+6. Organizational Policies and Procedures:
+   - Develop and enforce security policies and procedures that align with data privacy regulations and industry best practices.
+   - Educate and train staff on the importance of data privacy, copyright and intellectual property rights, client-centric transactions, and adherence to legislative requirements.
+   - Regularly audit and review systems and processes to identify and address any potential security vulnerabilities or non-compliance issues.
+
+Remember to consult AWS documentation and seek professional guidance to implement these suggestions effectively, ensuring they align with your specific requirements and compliance obligations.
+
+If you have any further questions or need more assistance, feel free to ask!
+
+========================================
+AWSTemplateFormatVersion: '2010-09-09'
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: my-dta-bucket
+      Region: us-east-1
+
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      # Configure instance properties as per application requirements
+
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      # Configure VPC properties, subnets, route tables, and IGW
+
+  IAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      # Configure IAM role properties for user access and permissions
+
+  RDSInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      # Configure RDS instance properties for the application database
+
+  VPNSiteToSiteConnection:
+    Type: AWS::EC2::VPNConnection
+    Properties:
+      # Configure VPN connection properties for secure access to DTA's network resources
+
+  DirectConnectConnection:
+    Type: AWS::DirectConnect::Connection
+    Properties:
+      # Configure Direct Connect connection properties for dedicated network connection
+
+  Route53Record:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      # Configure Route 53 properties to manage DNS and direct end-user requests
+
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      # Configure CloudFront distribution properties for content delivery and security
+
+  CloudTrail:
+    Type: AWS::CloudTrail::Trail
+    Properties:
+      # Configure CloudTrail properties for governance, compliance, and auditing
+
+  CloudWatchAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Configure CloudWatch alarm properties for resource and application monitoring
+
+  EBSVolume:
+    Type: AWS::EC2::Volume
+    Properties:
+      # Configure EBS volume properties for persistent block storage
+
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      # Configure Lambda function properties for running serverless code
+
+  S3TransferAcceleration:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccelerateConfiguration:
+        AccelerationStatus: Enabled
+

@@ -1,0 +1,4 @@
+C:\Users\wikin\AppData\Roaming\Microsoft\Templates\Document Themes
+
+Declaritive (Terraform, CloudFormation) & Imperative (Ansible, Chef). 
+The declarative approach focuses on what the eventual target configuration should be; the imperative focuses on how the infrastructure is to be changed to meet this. The declarative approach defines the desired state and the system executes what needs to happen to achieve that desired state. Imperative defines specific commands that need to be executed in the appropriate order to end with the desired conclusion.

@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  S3LogsToCribl:
+    Type: AWS::Serverless::Function
+    Properties:
+      Environment:
+        Variables:
+          CRIBL_URL: < Cribl HTTP input endpoint >
+          CRIBL_AUTH: < Cribl HTTP authToken >
+      Handler: index.handler
+      Description: Collect logs from S3, preprocess and route them with Cribl
+      Timeout: 20
+      CodeUri:
+        Bucket: <%REPO_BUCKET%>
+        Key: 4a15490f-6aab-4304-80bf-c1fe1736b548
+      Runtime: nodejs8.10
+      MemorySize: 512

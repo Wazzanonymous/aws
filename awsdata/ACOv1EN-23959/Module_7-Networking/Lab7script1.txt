@@ -1,0 +1,29 @@
+Task 1.2: Configure the AWS CLI on the CLI Host EC2 Instance
+Discover the region in which the CLI Host instance is running:
+22.curl http://169.254.169.254/latest/dynamic/instance-identity/document | grep region
+23.aws configure
+24. AccesKey:	AKIATV6PYVLRPF476TWA
+	Secret Access Key:	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
+	Region: us-east-1
+	Format: json
+	VPC1GatewayId:	igw-0494514f69ea5e983
+	WebServerSgId:	sg-08f7ed5ff38e28d2d
+	VPC1ID:	vpc-0810cef4e3f88b9d0
+	CliHostIP:	52.87.224.234
+	VPC1PubRouteTableId:	rtb-07c63a4e1d529306c
+	WebServerIP:	54.165.208.181
+	
+25.aws s3api create-bucket --bucket floglog1 --region <region> --create-bucket-configuration LocationConstraint=<region>
+26.aws ec2 describe-vpcs --query 'Vpcs[*].[VpcId,Tags[?Key==`Name`].Value,CidrBlock]' --filters "Name=tag:Name,Values='VPC1'"
+27.aws ec2 create-flow-logs --resource-type VPC --resource-ids <vpc-id> --traffic-type ALL --log-destination-type s3 --log-destination arn:aws:s3:::<flowlog####>
+29.aws ec2 describe-flows-logs
+32.aws ec2 describe-instances --filter "Name=ip-address,Values='<WebServerIP>'"
+33.aws ec2 describe-instances --filter "Name=ip-address,Values='<WebServerIP>'" --query 'Reservations[*].Instances[*].[State,PrivateIpAddress,InstanceId,SecurityGroups,SubnetId,KeyName]'
+------------------------------------------------------------------------
+37.aws ec2 describe-network-acls --filter "Name=association.subnet-id,Values='VPC1PublicSubnetID'" --query 'NetworkAcls[*].[NetworkAclId,Entries]'
+47.grep -rn REJECT
+48.grep -rn REJECT . | wc -l
+49.grep -rn ' 22 ' . | grep REJECT
+51.grep -rn ' 22 ' . | grep REJECT | grep <ip-address> 
+52.aws ec2 describe-network-interfaces --filters "Name=association.public-ip,Values='<WebServerIP>'" --query 'NetworkInterfaces[*].[NetworkInterfaceId,Association.PublicIp]'
+53.date -d @1554496931

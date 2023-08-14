@@ -1,0 +1,84 @@
+(1) ips -- public:35.170.72.17, private:10.200.0.134   (2) ips -- public:10.200.0.132, private:10.200.0.132
+SecretKey	zatkfnUrRJGaU+yA7mrJLY4lqkEaJhdfBPaWd6ih
+MomPopCafePublicIP	3.231.149.211
+CliHostPublicIP	35.170.72.17
+AccessKey	AKIA4GHT3ZUPFJ7GREX7
+CafeServerPubDNS	ec2-3-231-149-211.compute-1.amazonaws.com
+---------------------------------------------------------------------
+Name
+/mompopcafe/dbUrl
+Tier
+Standard
+Type
+String
+Last modified date
+Mon, 26 Sep 2022 01:35:27 GMT
+Value
+ec2-3-231-149-211.compute-1.amazonaws.com
+Description
+Database URL
+Data type
+text
+Last modified user
+arn:aws:sts::838030052638:assumed-role/c59569a1067411l2648643t1w83803005263-MomPopIamRole-KEUWO42109PK/i-0faede6fb7f858780
+Version
+1
+----------------------------------------------------------------
+Name
+/mompopcafe/dbName
+Tier
+Standard
+Type
+String
+Last modified date
+Mon, 26 Sep 2022 01:35:28 GMT
+Value
+mom_pop_db
+Description
+Database Name
+Data type
+text
+Last modified user
+arn:aws:sts::838030052638:assumed-role/c59569a1067411l2648643t1w83803005263-MomPopIamRole-KEUWO42109PK/i-0faede6fb7f858780
+Version
+1
+--------------------------------------------------------------------------
+Name
+/mompopcafe/dbUser
+Tier
+Standard
+Type
+String
+Last modified date
+Mon, 26 Sep 2022 01:35:28 GMT
+Value
+root
+Description
+Database User Name
+Data type
+text
+Last modified user
+arn:aws:sts::838030052638:assumed-role/c59569a1067411l2648643t1w83803005263-MomPopIamRole-KEUWO42109PK/i-0faede6fb7f858780
+Version
+1
+-----------------------------------------------------------------------
+Name
+/mompopcafe/dbPassword
+Tier
+Standard
+Type
+String
+Last modified date
+Mon, 26 Sep 2022 01:35:29 GMT
+Value
+re:St@rt!9
+Description
+Database Password
+Data type
+text
+Last modified user
+arn:aws:sts::838030052638:assumed-role/c59569a1067411l2648643t1w83803005263-MomPopIamRole-KEUWO42109PK/i-0faede6fb7f858780
+Version
+1
+-------------------------------------------------------------------
+
